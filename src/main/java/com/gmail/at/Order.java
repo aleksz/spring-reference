@@ -12,7 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Length;
 import org.springframework.core.style.ToStringCreator;
 
 
@@ -36,6 +38,8 @@ public class Order {
 	/**
 	 * @return the customer
 	 */
+	@Length(min = 5, max = 20)
+	@Pattern(regexp = "[a-zA-Z]*", message = "Only characters allowed")
 	public String getCustomer() {
 		return customer;
 	}

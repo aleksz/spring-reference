@@ -7,6 +7,8 @@ import static org.springframework.web.bind.annotation.RequestMethod.PUT;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.slf4j.Logger;
@@ -15,9 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
@@ -60,7 +62,14 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(value = "/{id}", method = POST)
-	public String update(Order order) {
+	public String update(@Valid Order order, BindingResult errors) {
+		
+		if (errors.hasErrors()) {
+			return "editOrder";
+		}
+		
+		LOG.info("Updating " + order);
+		
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(order);
 		return "redirect:/order";
@@ -76,7 +85,12 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(method = PUT)
-	public String add(Order order) {
+	public String add(@Valid Order order, BindingResult errors) {
+		
+		if (errors.hasErrors()) {
+			return "addOrder";
+		}
+		
 		Session session = sessionFactory.getCurrentSession();
 		session.saveOrUpdate(order);
 		return "redirect:/order";

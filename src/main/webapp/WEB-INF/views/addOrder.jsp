@@ -10,6 +10,7 @@
 	<c:url value="/order" var="formActionUrl"/>
 	<form:form commandName="order" method="PUT" action="${formActionUrl}">
 		<form:input path="customer"/>
+		<form:errors path="customer" element="div"/>
 		<input type="submit" value="Save"/>
 	</form:form>
 </body>
