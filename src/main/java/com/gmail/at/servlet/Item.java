@@ -1,4 +1,4 @@
-package com.gmail.at;
+package com.gmail.at.servlet;
 
 
 import javax.persistence.Entity;
@@ -6,6 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+
+import org.springframework.core.style.ToStringCreator;
+import org.springframework.core.style.ToStringStyler;
 
 /**
  * An item in an order
@@ -26,6 +29,13 @@ public class Item {
 
 	private int quantity;
 
+	protected Item() {
+	}
+	
+	public Item(Order order) {
+		this.order = order;
+	}
+	
 	/**
 	 * @return the order
 	 */
@@ -85,4 +95,12 @@ public class Item {
 		return id;
 	}
 
+	@Override
+	public String toString() {
+		return new ToStringCreator(this)
+				.append("product", product)
+				.append("quantity", quantity)
+				.append("price", price)
+				.toString();
+	}
 }

@@ -25,9 +25,7 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-	<context:component-scan base-package="com.gmail.at" />
-	
-	<jdbc:embedded-database id="dataSource" type="H2"/>
+	<context:component-scan base-package="com.gmail.at.servlet" />
 	
 	<tx:annotation-driven transaction-manager="transactionManager" />
 	

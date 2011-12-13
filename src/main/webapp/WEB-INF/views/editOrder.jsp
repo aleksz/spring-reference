@@ -10,6 +10,7 @@
 	<c:url value="/order/${order.id}" var="formActionUrl"/>
 	
 	<form:form commandName="order" method="POST" action="${formActionUrl}">
+		<form:hidden path="id"/>
 		<form:input path="customer"/>
 		<form:errors path="customer" element="div"/>
 		<input type="submit" value="Save"/>
@@ -18,5 +19,11 @@
 	<form:form commandName="order" method="DELETE" action="${formActionUrl}">
 		<input type="submit" value="Delete"/>
 	</form:form>
+	
+	<c:forEach items="${order.items}" var="item">
+		<div>${item.product} ${item.quantity} x ${item.price}$</div>
+	</c:forEach>
+	
+	<a href="${formActionUrl}/item/add">Add item</a>
 </body>
 </html>
