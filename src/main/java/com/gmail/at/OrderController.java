@@ -1,5 +1,6 @@
 package com.gmail.at;
 
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -9,6 +10,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.hibernate.ObjectNotFoundException;
 import org.hibernate.SessionFactory;
 import org.hibernate.classic.Session;
 import org.slf4j.Logger;
@@ -18,8 +20,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 @Controller
@@ -55,6 +59,7 @@ public class OrderController {
 	@Transactional
 	@RequestMapping(value = "/{id}", method = DELETE)
 	public String delete(Order order) {
+		LOG.info("Deleting " + order);
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(order);
 		return "redirect:/order";
@@ -92,7 +97,12 @@ public class OrderController {
 		}
 		
 		Session session = sessionFactory.getCurrentSession();
-		session.saveOrUpdate(order);
+		session.save(order);
 		return "redirect:/order";
+	}
+	
+	@ResponseStatus(value = NOT_FOUND)
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public void objectNotFound() {
 	}
 }
