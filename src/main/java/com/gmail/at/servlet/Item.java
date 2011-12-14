@@ -25,7 +25,6 @@ public class Item {
 	private Order order;
 
 	@NotBlank
-//	@UniqueProductInOrder
 	private String product;
 
 	private double price;
