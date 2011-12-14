@@ -7,7 +7,8 @@
 	<title>Order</title>
 </head>
 <body>
-	<form:form commandName="order" method="POST">
+	<c:url value="/orders" var="formActionUrl"/>
+	<form:form commandName="order" method="POST" action="${formActionUrl}">
 		<form:input path="customer"/>
 		<form:errors path="customer" element="div"/>
 		<input type="submit" value="Save"/>

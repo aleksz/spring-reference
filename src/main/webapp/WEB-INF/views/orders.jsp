@@ -7,10 +7,10 @@
 <body>
 	<c:forEach items="${orderList}" var="order">
 		<div>
-			<a href="order/${order.id}">${order.customer}</a>
+			<a href="orders/${order.id}">${order.customer}</a>
 		</div>
 	</c:forEach>
 	
-	<a href="order/add">Add new order</a>
+	<a href="orders/add">Add new order</a>
 </body>
 </html>

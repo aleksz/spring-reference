@@ -6,9 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
-import org.springframework.core.style.ToStringStyler;
 
 /**
  * An item in an order
@@ -23,19 +24,23 @@ public class Item {
 	@ManyToOne
 	private Order order;
 
+	@NotBlank
+//	@UniqueProductInOrder
 	private String product;
 
 	private double price;
-
-	private int quantity;
 
 	protected Item() {
 	}
 	
 	public Item(Order order) {
 		this.order = order;
+		order.getItems().add(this);
 	}
 	
+	@Min(1)
+	private int quantity;
+
 	/**
 	 * @return the order
 	 */

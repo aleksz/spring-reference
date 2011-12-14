@@ -7,7 +7,7 @@
 	<title>Order</title>
 </head>
 <body>
-	<c:url value="/order/${order.id}" var="formActionUrl"/>
+	<c:url value="/orders/${order.id}" var="formActionUrl"/>
 	
 	<form:form commandName="order" method="POST" action="${formActionUrl}">
 		<form:hidden path="id"/>
@@ -24,6 +24,6 @@
 		<div>${item.product} ${item.quantity} x ${item.price}$</div>
 	</c:forEach>
 	
-	<a href="${formActionUrl}/item/add">Add item</a>
+	<a href="${formActionUrl}/items/add">Add item</a>
 </body>
 </html>
