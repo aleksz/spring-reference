@@ -48,16 +48,14 @@ public class ItemsController {
 	
 	@Transactional(readOnly = true)
 	@RequestMapping(value = "add", method = GET)
-	public String createForm(/*@PathVariable Long orderId, Model model*/) {
-//		model.addAttribute(new Item());
+	public String createForm() {
 		return "addItem";
 	}
 	
 	@Transactional
 	@RequestMapping(method = POST)
-	public String create(/*Order order, */@Valid Item item, Model model) {
+	public String create(@Valid Item item, Model model) {
 		LOG.info("Adding item " + item);
-//		order.getItems().add(item);
 		hibernateTemplate.saveOrUpdate(item.getOrder());
 		return "redirect:/orders/" + item.getOrder().getId();
 	}
