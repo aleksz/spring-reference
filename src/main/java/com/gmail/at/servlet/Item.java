@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Min;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
 
@@ -15,6 +17,7 @@ import org.springframework.core.style.ToStringCreator;
  * An item in an order
  */
 @Entity
+@UniqueProductInOrder
 public class Item {
 
 	@Id
@@ -29,6 +32,9 @@ public class Item {
 
 	private double price;
 
+	@Min(1)
+	private int quantity;
+
 	protected Item() {
 	}
 	
@@ -36,9 +42,6 @@ public class Item {
 		this.order = order;
 		order.getItems().add(this);
 	}
-	
-	@Min(1)
-	private int quantity;
 
 	/**
 	 * @return the order
@@ -106,5 +109,38 @@ public class Item {
 				.append("quantity", quantity)
 				.append("price", price)
 				.toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj == null) {
+			return false;
+		}
+		
+		if (obj == this) {
+			return true;
+		}
+		
+		if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+		Item other = (Item) obj;
+
+		return new EqualsBuilder()
+				.append(product, other.product)
+				.append(order, other.order)
+				.append(price, other.price)
+				.isEquals();
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+			.append(product)
+			.append(order)
+			.append(price)
+			.toHashCode();
 	}
 }

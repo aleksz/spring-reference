@@ -9,11 +9,12 @@
 <body>
 	<c:url value="/orders/${item.order.id}/items" var="formActionUrl"/>
 	<form:form commandName="item" method="POST" action="${formActionUrl}">
-		<form:input path="product"/>
+		<form:errors element="div"/>
+		<div>Product name: <form:input path="product"/></div>
 		<form:errors path="product" element="div"/>
-		<form:input path="price"/>
+		<div>Price: <form:input path="price"/></div>
 		<form:errors path="price" element="div"/>
-		<form:input path="quantity"/>
+		<div>Quantity: <form:input path="quantity"/></div>
 		<form:errors path="quantity" element="div"/>
 		<input type="submit" value="Save"/>
 	</form:form>

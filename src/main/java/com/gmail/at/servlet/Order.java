@@ -2,6 +2,7 @@ package com.gmail.at.servlet;
 
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.LinkedHashSet;
 
 import javax.persistence.CascadeType;
@@ -14,6 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -34,6 +37,8 @@ public class Order {
 	private String customer;
 	
 	private String email;
+	
+	private Date date;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ORDER_ID")
@@ -89,5 +94,36 @@ public class Order {
 	@Override
 	public String toString() {
 		return new ToStringCreator(this).append(customer).toString();
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		
+		if (obj == null) {
+			return false;
+		}
+		
+		if (obj == this) {
+			return true;
+		}
+		
+		if (obj.getClass() != getClass()) {
+			return false;
+		}
+
+		Order other = (Order) obj;
+
+		return new EqualsBuilder()
+				.append(customer, other.customer)
+				.append(date, other.date)
+				.isEquals();
+	}
+	
+	@Override
+	public int hashCode() {
+		return new HashCodeBuilder()
+				.append(customer)
+				.append(date)
+				.toHashCode();
 	}
 }
