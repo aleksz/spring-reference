@@ -1,4 +1,4 @@
-package com.gmail.at.servlet.controllers;
+package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gmail.at.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
 
 
 @Controller

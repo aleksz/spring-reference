@@ -1,4 +1,4 @@
-package com.gmail.at.servlet.controllers;
+package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 
 import static org.hibernate.criterion.DetachedCriteria.forClass;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gmail.at.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
 
 
 @Controller

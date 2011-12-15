@@ -4,8 +4,8 @@ import static junit.framework.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.gmail.at.servlet.domain.Item;
-import com.gmail.at.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.servlet.domain.Item;
+import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
 
 public class ItemTest {
 
