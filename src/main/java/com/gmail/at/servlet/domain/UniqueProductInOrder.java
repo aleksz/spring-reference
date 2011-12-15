@@ -1,4 +1,4 @@
-package com.gmail.at.servlet;
+package com.gmail.at.servlet.domain;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;

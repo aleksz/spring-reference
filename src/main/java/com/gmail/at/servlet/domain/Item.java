@@ -1,4 +1,4 @@
-package com.gmail.at.servlet;
+package com.gmail.at.servlet.domain;
 
 
 import javax.persistence.Entity;
@@ -12,6 +12,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
+
 
 /**
  * An item in an order

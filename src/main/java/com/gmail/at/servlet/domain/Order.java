@@ -1,4 +1,4 @@
-package com.gmail.at.servlet;
+package com.gmail.at.servlet.domain;
 
 
 import java.util.Collection;

@@ -1,6 +1,7 @@
-package com.gmail.at.servlet;
+package com.gmail.at.servlet.controllers;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -13,21 +14,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gmail.at.servlet.domain.Order;
+
+
 @Controller
-@RequestMapping("/orders/{orderId}/items")
-public class ItemsController {
+@RequestMapping("/orders/{id}")
+public class OrderController {
 	
-	private static final Logger LOG = LoggerFactory.getLogger(ItemsController.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OrderController.class);
 	
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
@@ -38,33 +40,35 @@ public class ItemsController {
 	}
 	
 	@ExceptionHandler(BindException.class)
-	public ModelAndView itemHasErrors(BindException e) {
-		return new ModelAndView("addItem", e.getModel());
+	public ModelAndView orderHasErrors(BindException e) {
+		return new ModelAndView("editOrder", e.getModel());
 	}
 	
 	@ModelAttribute
-	public Item prepareItem(
-			@PathVariable Long orderId,
-			@RequestParam(defaultValue = "") String product,
-			@RequestParam(defaultValue = "0") Double price) {
-		
-		return new Item(
-				hibernateTemplate.load(Order.class, orderId), 
-				product,
-				price);
+	public Order prepareOrder(@PathVariable Long id) {
+		return hibernateTemplate.load(Order.class, id);
 	}
 	
 	@Transactional(readOnly = true)
-	@RequestMapping(value = "add", method = GET)
-	public String createForm() {
-		return "addItem";
+	@RequestMapping(method = GET)
+	public String read(Order order) {
+		LOG.info("Loaded " + order);
+		return "editOrder";
+	}
+	
+	@Transactional
+	@RequestMapping(method = DELETE)
+	public String delete(Order order) {
+		LOG.info("Deleting " + order);
+		hibernateTemplate.delete(order);
+		return "redirect:/orders";
 	}
 	
 	@Transactional
 	@RequestMapping(method = POST)
-	public String create(@Valid Item item, Model model) {
-		LOG.info("Adding item " + item);
-		hibernateTemplate.saveOrUpdate(item.getOrder());
-		return "redirect:/orders/" + item.getOrder().getId();
+	public String update(@Valid Order order) {
+		LOG.info("Updating " + order);
+		hibernateTemplate.saveOrUpdate(order);
+		return "redirect:/orders";
 	}
 }

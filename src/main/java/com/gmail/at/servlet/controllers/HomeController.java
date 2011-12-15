@@ -1,4 +1,4 @@
-package com.gmail.at.servlet;
+package com.gmail.at.servlet.controllers;
 
 import java.text.DateFormat;
 import java.util.Date;

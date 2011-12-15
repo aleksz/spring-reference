@@ -4,11 +4,14 @@ import static junit.framework.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.gmail.at.servlet.domain.Item;
+import com.gmail.at.servlet.domain.Order;
+
 public class ItemTest {
 
 	@Test
 	public void itemsWithSameProductAndPriceAndOrderAreEqual() {
-		Order order = new Order();
+		Order order = new Order("c");
 		Item item1 = new Item(order, "a", 5);
 		Item item2 = new Item(order, "a", 5);
 		assertEquals(item1, item2);
@@ -16,7 +19,7 @@ public class ItemTest {
 	
 	@Test
 	public void itemsWithSameProductAndPriceAndOrderHaveSameHashCodel() {
-		Order order = new Order();
+		Order order = new Order("c");
 		Item item1 = new Item(order, "a", 5);
 		Item item2 = new Item(order, "a", 5);
 		assertEquals(item1.hashCode(), item2.hashCode());
