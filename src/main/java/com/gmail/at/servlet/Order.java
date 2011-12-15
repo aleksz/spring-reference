@@ -14,7 +14,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Pattern;
 
+import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.core.style.ToStringCreator;
 
 
@@ -30,6 +32,8 @@ public class Order {
 	private Long id;
 	
 	private String customer;
+	
+	private String email;
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ORDER_ID")
@@ -72,6 +76,16 @@ public class Order {
 		return id;
 	}
 	
+	@NotEmpty
+	@Email
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
 	@Override
 	public String toString() {
 		return new ToStringCreator(this).append(customer).toString();

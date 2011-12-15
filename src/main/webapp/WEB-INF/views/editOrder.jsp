@@ -10,9 +10,9 @@
 	<c:url value="/orders/${order.id}" var="formActionUrl"/>
 	
 	<form:form commandName="order" method="POST" action="${formActionUrl}">
-		<form:hidden path="id"/>
-		<form:input path="customer"/>
-		<form:errors path="customer" element="div"/>
+		<div>Customer name: ${order.customer}</div>
+		<div>Email: <form:input path="email"/></div>
+		<form:errors path="email" element="div"/>
 		<input type="submit" value="Save"/>
 	</form:form>
 	
