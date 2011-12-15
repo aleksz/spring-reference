@@ -38,8 +38,10 @@ public class Item {
 	protected Item() {
 	}
 	
-	public Item(Order order) {
+	public Item(Order order, String product, double price) {
 		this.order = order;
+		this.product = product;
+		this.price = price;
 		order.getItems().add(this);
 	}
 
@@ -58,26 +60,10 @@ public class Item {
 	}
 
 	/**
-	 * @param product
-	 *            the product to set
-	 */
-	public void setProduct(String product) {
-		this.product = product;
-	}
-
-	/**
 	 * @return the price
 	 */
 	public double getPrice() {
 		return price;
-	}
-
-	/**
-	 * @param price
-	 *            the price to set
-	 */
-	public void setPrice(double price) {
-		this.price = price;
 	}
 
 	/**

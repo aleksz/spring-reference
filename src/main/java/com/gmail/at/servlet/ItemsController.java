@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,8 +43,15 @@ public class ItemsController {
 	}
 	
 	@ModelAttribute
-	public Item prepareItem(@PathVariable Long orderId) {
-		return new Item(hibernateTemplate.load(Order.class, orderId));
+	public Item prepareItem(
+			@PathVariable Long orderId,
+			@RequestParam(defaultValue = "") String product,
+			@RequestParam(defaultValue = "0") Double price) {
+		
+		return new Item(
+				hibernateTemplate.load(Order.class, orderId), 
+				product,
+				price);
 	}
 	
 	@Transactional(readOnly = true)

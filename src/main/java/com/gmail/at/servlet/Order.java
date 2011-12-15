@@ -19,6 +19,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.core.style.ToStringCreator;
 
@@ -32,32 +33,30 @@ public class Order {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long id;
+	protected Long id;
 	
-	private String customer;
+	protected String customer;
 	
-	private String email;
+	protected String email;
 	
-	private Date date;
+	protected Date date = new Date();
 	
 	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="ORDER_ID")
 	private Collection<Item> items = new LinkedHashSet<Item>();
 
-	/**
-	 * @return the customer
-	 */
+	protected Order() {
+	}
+
+	public Order(String customer) {
+		this.customer = customer;
+	}
+	
+	@NotBlank
 	@Length(min = 5, max = 20)
 	@Pattern(regexp = "[a-zA-Z]*", message = "Only characters allowed")
 	public String getCustomer() {
 		return customer;
-	}
-
-	/**
-	 * @param customer the customer to set
-	 */
-	public void setCustomer(String customer) {
-		this.customer = customer;
 	}
 
 	/**
@@ -91,6 +90,10 @@ public class Order {
 		this.email = email;
 	}
 
+	public Date getDate() {
+		return date;
+	}
+	
 	@Override
 	public String toString() {
 		return new ToStringCreator(this).append(customer).toString();
