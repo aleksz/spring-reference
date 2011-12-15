@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,12 +46,11 @@ public class OrderController {
 	public Order prepareOrder(@PathVariable Long id) {
 		return hibernateTemplate.load(Order.class, id);
 	}
-
+	
 	@Transactional(readOnly = true)
 	@RequestMapping(method = GET)
-	public String read(Order order, Model model) {
+	public String read(Order order) {
 		LOG.info("Loaded " + order);
-		model.addAttribute(order);
 		return "editOrder";
 	}
 	
@@ -66,7 +64,7 @@ public class OrderController {
 	
 	@Transactional
 	@RequestMapping(method = POST)
-	public String update(@Valid Order order, Model model) {
+	public String update(@Valid Order order) {
 		LOG.info("Updating " + order);
 		hibernateTemplate.saveOrUpdate(order);
 		return "redirect:/orders";
