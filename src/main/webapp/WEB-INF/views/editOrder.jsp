@@ -25,5 +25,7 @@
 	</c:forEach>
 	
 	<a href="${formActionUrl}/items/add">Add item</a>
+	
+	<div>${remoteAddr}</div>
 </body>
 </html>

@@ -3,10 +3,8 @@ package com.gmail.at.zhuikov.aleksandr.root;
 import java.util.Properties;
 
 import javax.sql.DataSource;
-import javax.validation.ValidatorFactory;
 
 import org.hibernate.dialect.H2Dialect;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

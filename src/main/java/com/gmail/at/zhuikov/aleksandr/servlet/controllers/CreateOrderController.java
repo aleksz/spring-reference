@@ -8,18 +8,17 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.servlet.repository.OrderRepository;
 
 
 @Controller
@@ -28,27 +27,27 @@ public class CreateOrderController {
 	private static final Logger LOG = LoggerFactory.getLogger(CreateOrderController.class);
 	
 	@Autowired
-	private HibernateTemplate hibernateTemplate;
+	private OrderRepository orderRepository;
 	
-	@ExceptionHandler(BindException.class)
-	public ModelAndView orderHasErrors(BindException e) {
-		return new ModelAndView("addOrder", e.getModel());
-	}
-
 	@ModelAttribute
 	public Order prepareOrder(@RequestParam(defaultValue = "") String customer) {
 		return new Order(customer);
 	}
 	
-	@Transactional
 	@RequestMapping(value = "/orders", method = POST)
-	public String create(@Valid Order order) {
+	public String create(@Valid Order order, BindingResult errors, Model model)
+			throws ModelAndViewDefiningException {
+
+		if (errors.hasErrors()) {
+			throw new ModelAndViewDefiningException(
+					new ModelAndView("addOrder", model.asMap()));
+		}
+
 		LOG.info("Adding new order " + order);
-		hibernateTemplate.save(order);
+		orderRepository.save(order);
 		return "redirect:/orders";
 	}
 	
-	@Transactional(readOnly = true)
 	@RequestMapping(value = "/orders/add", method = GET)
 	public String createForm(Model model) {
 		return "addOrder";
