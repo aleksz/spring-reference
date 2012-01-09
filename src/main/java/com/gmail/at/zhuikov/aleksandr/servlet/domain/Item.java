@@ -31,6 +31,7 @@ public class Item {
 	@NotBlank
 	private String product;
 
+	@Min(0)
 	private double price;
 
 	@Min(1)
