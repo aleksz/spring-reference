@@ -125,9 +125,9 @@ public class Item {
 	@Override
 	public int hashCode() {
 		return new HashCodeBuilder()
-			.append(product)
-			.append(order)
-			.append(price)
-			.toHashCode();
+				.append(product)
+				.append(order)
+				.append(price)
+				.toHashCode();
 	}
 }
