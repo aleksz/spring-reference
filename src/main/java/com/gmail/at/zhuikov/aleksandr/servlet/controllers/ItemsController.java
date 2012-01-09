@@ -12,11 +12,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
+import org.springframework.validation.DataBinder;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -42,16 +43,18 @@ public class ItemsController {
 		return new ModelAndView("addItem", e.getModel());
 	}
 	
+	/**
+	 * We are binding directly to fields, avoiding setters as {@link Item} is
+	 * immutable.
+	 */
+	@InitBinder
+	public void initFieldAccess(DataBinder binder) {
+		binder.initDirectFieldAccess();
+	}
+	
 	@ModelAttribute
-	public Item prepareItem(
-			@PathVariable Long orderId,
-			@RequestParam(defaultValue = "") String product,
-			@RequestParam(defaultValue = "0") Double price) {
-		
-		return new Item(
-				orderRepository.load(orderId),
-				product,
-				price);
+	public Item prepareItem(@PathVariable Long orderId) {
+		return new Item(orderRepository.load(orderId), "", 0);
 	}
 	
 	@RequestMapping(value = "add", method = GET)
