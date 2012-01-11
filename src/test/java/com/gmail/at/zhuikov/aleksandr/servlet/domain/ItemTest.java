@@ -1,7 +1,9 @@
 package com.gmail.at.zhuikov.aleksandr.servlet.domain;
 
 import static javax.validation.Validation.buildDefaultValidatorFactory;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
+import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertTrue;
 
 import java.lang.reflect.Field;
@@ -80,5 +82,35 @@ public class ItemTest {
 		item.setQuantity(0);
 		Set<ConstraintViolation<Item>> violations = validator.validateProperty(item, "quantity");
 		assertFalse(violations.isEmpty());
+	}
+	
+	@Test
+	public void equalsWhenOrderProductAndPricedAreTheSame() {
+		Item item1 = new Item(order, "x", 1);
+		item1.setQuantity(1);
+		Item item2 = new Item(order, "x", 1);
+		item1.setQuantity(2);
+		assertEquals(item1, item2);
+	}
+	
+	@Test
+	public void notEqualWhenOrderIsDifferent() {
+		Item item1 = new Item(order, "x", 1);
+		Item item2 = new Item(new Order("anotherClient"), "x", 1);
+		assertNotSame(item1, item2);
+	}
+	
+	@Test
+	public void notEqualWhenProductIsDifferent() {
+		Item item1 = new Item(order, "x", 1);
+		Item item2 = new Item(order, "xx", 1);
+		assertNotSame(item1, item2);
+	}
+	
+	@Test
+	public void notEqualWhenPriceIsDifferent() {
+		Item item1 = new Item(order, "x", 1);
+		Item item2 = new Item(order, "x", 2);
+		assertNotSame(item1, item2);
 	}
 }
