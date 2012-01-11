@@ -28,11 +28,11 @@ import org.springframework.core.style.ToStringCreator;
  * An order.
  */
 @Entity
-@Table(name="T_ORDER")
+@Table(name = "T_ORDER")
 public class Order {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	protected Long id;
 	
 	protected String customer;
@@ -41,8 +41,8 @@ public class Order {
 	
 	protected Date date = new Date();
 	
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="ORDER_ID")
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(name = "ORDER_ID")
 	private Collection<Item> items = new LinkedHashSet<Item>();
 
 	protected Order() {
