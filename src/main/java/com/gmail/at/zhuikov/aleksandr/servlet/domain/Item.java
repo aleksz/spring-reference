@@ -30,13 +30,10 @@ public class Item {
 	@ManyToOne
 	private Order order;
 
-	@NotBlank
 	private String product;
 
-	@Min(0)
 	private double price;
 
-	@Min(1)
 	private int quantity;
 
 	protected Item() {
@@ -59,6 +56,7 @@ public class Item {
 	/**
 	 * @return the product
 	 */
+	@NotBlank
 	public String getProduct() {
 		return product;
 	}
@@ -66,6 +64,7 @@ public class Item {
 	/**
 	 * @return the price
 	 */
+	@Min(0)
 	public double getPrice() {
 		return price;
 	}
@@ -73,6 +72,7 @@ public class Item {
 	/**
 	 * @return the quantity
 	 */
+	@Min(1)
 	public int getQuantity() {
 		return quantity;
 	}
