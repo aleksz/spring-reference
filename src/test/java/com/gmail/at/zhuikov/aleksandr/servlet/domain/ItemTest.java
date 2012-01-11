@@ -113,4 +113,11 @@ public class ItemTest {
 		Item item2 = new Item(order, "x", 2);
 		assertNotSame(item1, item2);
 	}
+	
+	@Test
+	public void itemsWithSameProductAndPriceAndOrderHaveSameHashCodel() {
+		Item item1 = new Item(order, "a", 5);
+		Item item2 = new Item(order, "a", 5);
+		assertEquals(item1.hashCode(), item2.hashCode());
+	}
 }
