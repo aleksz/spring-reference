@@ -28,9 +28,12 @@ public class ItemTest {
 
 	@Before
 	public void prepareOrder() {
-		order = new Order("c");
+		order = new Order("thecustomer");
+		order.setEmail("a@a.a");
+		Set<ConstraintViolation<Order>> constraintViolations = validator.validate(order);
+		assertTrue(constraintViolations.toString(), constraintViolations.isEmpty());
 	}
-	
+
 	@Test
 	public void noValidationErrorsWhenItemIsValid() {
 		Item item = new Item(order, "x", 0);

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -62,6 +63,7 @@ public class Order {
 	/**
 	 * @return the items
 	 */
+	@Valid
 	public Collection<Item> getItems() {
 		return items;
 	}

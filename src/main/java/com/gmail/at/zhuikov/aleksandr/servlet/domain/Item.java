@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.GroupSequence;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -49,6 +50,7 @@ public class Item {
 	/**
 	 * @return the order
 	 */
+	@Valid
 	public Order getOrder() {
 		return order;
 	}
