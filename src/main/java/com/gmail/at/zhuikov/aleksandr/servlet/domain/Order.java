@@ -54,7 +54,7 @@ public class Order {
 	}
 	
 	@NotBlank
-	@Length(min = 5, max = 20)
+	@Length(min = 5, max = 30)
 	@Pattern(regexp = "[a-zA-Z]*", message = "Only characters allowed")
 	public String getCustomer() {
 		return customer;

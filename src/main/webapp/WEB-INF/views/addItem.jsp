@@ -16,7 +16,7 @@
 		<form:errors path="price" element="div"/>
 		<div>Quantity: <form:input path="quantity"/></div>
 		<form:errors path="quantity" element="div"/>
-		<input type="submit" value="Save"/>
+		<input type="submit" name="save" value="Save"/>
 	</form:form>
 </body>
 </html>

@@ -13,7 +13,7 @@
 		<form:errors path="customer" element="div"/>
 		<div>Email <form:input path="email"/></div>
 		<form:errors path="email" element="div"/>
-		<input type="submit" value="Save"/>
+		<input type="submit" name="save" value="Save"/>
 	</form:form>
 </body>
 </html>
