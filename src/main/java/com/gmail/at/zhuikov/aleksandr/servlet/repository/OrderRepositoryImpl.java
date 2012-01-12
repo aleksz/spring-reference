@@ -32,6 +32,7 @@ public class OrderRepositoryImpl extends HibernateDaoSupport implements OrderRep
 	}
 
 	@Override
+	@Transactional
 	public void delete(Order order) {
 		getHibernateTemplate().delete(order);
 	}
