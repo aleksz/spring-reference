@@ -6,7 +6,6 @@ import static junit.framework.Assert.assertFalse;
 import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertTrue;
 
-import java.lang.reflect.Field;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -15,6 +14,7 @@ import javax.validation.Validator;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.springframework.test.util.ReflectionTestUtils;
 
 public class ItemTest {
 
@@ -50,9 +50,7 @@ public class ItemTest {
 		Item item2 = new Item(order, "", 0);
 		item2.setQuantity(1);
 		
-		Field productField = item2.getClass().getDeclaredField("product");
-		productField.setAccessible(true);
-		productField.set(item2, "x");
+		ReflectionTestUtils.setField(item2, "product", "x");
 		
 		Set<ConstraintViolation<Item>> violations = validator.validate(item2);
 		assertFalse(violations.isEmpty());
