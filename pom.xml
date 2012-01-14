@@ -271,7 +271,7 @@
 						</goals>
 						<configuration>
 							<sources>
-								<source>src/it/java</source>
+								<source>src/ui-test/java</source>
 							</sources>
 						</configuration>
 					</execution>
