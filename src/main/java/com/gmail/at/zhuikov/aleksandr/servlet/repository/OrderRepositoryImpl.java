@@ -4,7 +4,8 @@ import static org.hibernate.criterion.DetachedCriteria.forClass;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import javax.inject.Inject;
+
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
@@ -15,7 +16,7 @@ import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
 @Repository
 public class OrderRepositoryImpl extends HibernateDaoSupport implements OrderRepository {
 
-	@Autowired
+	@Inject
 	public OrderRepositoryImpl(HibernateTemplate hibernateTemplate) {
 		setHibernateTemplate(hibernateTemplate);
 	}

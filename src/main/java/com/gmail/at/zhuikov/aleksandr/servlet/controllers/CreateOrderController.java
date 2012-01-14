@@ -3,11 +3,11 @@ package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,7 +26,7 @@ public class CreateOrderController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(CreateOrderController.class);
 	
-	@Autowired
+	@Inject
 	private OrderRepository orderRepository;
 	
 	@ModelAttribute

@@ -4,12 +4,12 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
+import javax.inject.Inject;
 import javax.validation.Valid;
 
 import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindException;
 import org.springframework.validation.DataBinder;
@@ -31,7 +31,7 @@ public class ItemsController {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(ItemsController.class);
 	
-	@Autowired
+	@Inject
 	private OrderRepository orderRepository;
 	
 	@ResponseStatus(value = NOT_FOUND)
