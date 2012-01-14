@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.servlet.repository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 
 
 @Controller

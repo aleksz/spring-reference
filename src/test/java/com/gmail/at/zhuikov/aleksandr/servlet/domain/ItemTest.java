@@ -16,6 +16,9 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
+
 public class ItemTest {
 
 	private static Validator validator;

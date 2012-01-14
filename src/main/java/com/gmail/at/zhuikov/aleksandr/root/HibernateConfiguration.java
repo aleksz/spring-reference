@@ -13,8 +13,8 @@ import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Item;
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
 @Configuration
 public class HibernateConfiguration {

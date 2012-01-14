@@ -1,8 +1,8 @@
-package com.gmail.at.zhuikov.aleksandr.servlet.repository;
+package com.gmail.at.zhuikov.aleksandr.root.respository;
 
 import java.util.List;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
 public interface OrderRepository {
 

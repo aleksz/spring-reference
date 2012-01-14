@@ -11,7 +11,7 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
 public class CreateOrderControllerTest {
 

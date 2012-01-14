@@ -1,4 +1,4 @@
-package com.gmail.at.zhuikov.aleksandr.servlet.domain;
+package com.gmail.at.zhuikov.aleksandr.root.domain;
 
 
 import javax.persistence.Entity;

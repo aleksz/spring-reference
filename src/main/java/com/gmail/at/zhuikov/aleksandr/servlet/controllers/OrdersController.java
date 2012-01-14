@@ -12,8 +12,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.servlet.repository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 
 
 @Controller

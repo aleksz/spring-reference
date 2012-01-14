@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.DefaultItem;
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Item;
-import com.gmail.at.zhuikov.aleksandr.servlet.repository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.domain.DefaultItem;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
+import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 
 @Controller
 @RequestMapping("/orders/{orderId}/items")

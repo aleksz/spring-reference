@@ -1,4 +1,4 @@
-package com.gmail.at.zhuikov.aleksandr.servlet.repository;
+package com.gmail.at.zhuikov.aleksandr.root.respository;
 
 import static org.hibernate.criterion.DetachedCriteria.forClass;
 
@@ -11,7 +11,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.gmail.at.zhuikov.aleksandr.servlet.domain.Order;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
 @Repository
 public class OrderRepositoryImpl extends HibernateDaoSupport implements OrderRepository {
