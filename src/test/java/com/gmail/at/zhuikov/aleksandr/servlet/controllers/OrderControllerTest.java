@@ -3,7 +3,7 @@ package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.fail;
 import static org.mockito.Mockito.verify;
-import static org.mockito.MockitoAnnotations.initMocks;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.ModelAndViewAssert.assertModelAttributeAvailable;
 import static org.springframework.test.web.ModelAndViewAssert.assertViewName;
 
@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindException;
@@ -20,38 +21,48 @@ import org.springframework.web.servlet.ModelAndViewDefiningException;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 
-public class CreateOrderControllerTest {
+public class OrderControllerTest {
 
 	@Mock 
 	private OrderRepository orderRepository;
 	
-	@InjectMocks 
-	private CreateOrderController controller = new CreateOrderController();
+	@InjectMocks
+	private OrderController controller;
 	
 	@Before
-	public void injectMocks() {
-		initMocks(this);
+	public void initMocks() {
+		MockitoAnnotations.initMocks(this);
 	}
 	
 	@Test
-	public void createForm() {
-		assertEquals("addOrder", controller.createForm());
+	public void delete() {
+		Order order = new Order("x");
+		String view = controller.delete(order);
+		assertEquals("redirect:/orders", view);
+		verify(orderRepository).delete(order);
 	}
 	
 	@Test
-	public void prepareOrder() {
-		Order order = controller.prepareOrder("x");
-		assertEquals("x", order.getCustomer());
+	public void read() {
+		assertEquals("editOrder", controller.read(new Order("x")));
 	}
 	
+	@Test
+	public void test() {
+		Order expected = new Order("x");
+		when(orderRepository.load(2)).thenReturn(expected);
+		Order order = controller.prepareOrder(2L);
+		assertEquals(expected, order);
+	}
+
 	@Test
 	public void create() throws ModelAndViewDefiningException {
 		Order order = new Order("x");
 		BindingResult errors = new BindException(order, "order");
 		Model model = new ExtendedModelMap();
 		
-		String view = controller.create(order, errors, model);
-		verify(orderRepository).save(order);
+		String view = controller.update(order, errors, model);
+		verify(orderRepository).update(order);
 		assertEquals("redirect:/orders", view);
 	}
 	
@@ -65,14 +76,13 @@ public class CreateOrderControllerTest {
 		model.addAttribute(order);
 		
 		try {
-			controller.create(order, errors, model);
+			controller.update(order, errors, model);
 		} catch (ModelAndViewDefiningException e) {
-			assertViewName(e.getModelAndView(), "addOrder");
+			assertViewName(e.getModelAndView(), "editOrder");
 			assertModelAttributeAvailable(e.getModelAndView(), "order");
 			return;
 		}
 		
-		fail("Shoudl throw exception");
+		fail("Should throw exception");
 	}
-
 }

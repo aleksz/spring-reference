@@ -3,7 +3,6 @@ package com.gmail.at.zhuikov.aleksandr.servlet.domain;
 import static javax.validation.Validation.buildDefaultValidatorFactory;
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertNotSame;
 import static junit.framework.Assert.assertTrue;
 
 import java.util.Set;
@@ -101,21 +100,33 @@ public class ItemTest {
 	public void notEqualWhenOrderIsDifferent() {
 		Item item1 = new Item(order, "x", 1);
 		Item item2 = new Item(new Order("anotherClient"), "x", 1);
-		assertNotSame(item1, item2);
+		assertFalse(item1.equals(item2));
 	}
 	
 	@Test
 	public void notEqualWhenProductIsDifferent() {
 		Item item1 = new Item(order, "x", 1);
 		Item item2 = new Item(order, "xx", 1);
-		assertNotSame(item1, item2);
+		assertFalse(item1.equals(item2));
 	}
 	
 	@Test
 	public void notEqualWhenPriceIsDifferent() {
 		Item item1 = new Item(order, "x", 1);
 		Item item2 = new Item(order, "x", 2);
-		assertNotSame(item1, item2);
+		assertFalse(item1.equals(item2));
+	}
+	
+	@Test
+	public void notEqualToNull() {
+		Item item = new Item(order, "x", 1);
+		assertFalse(item.equals(null));
+	}
+	
+	@Test
+	public void doesNotGiveClassCastExceptionWhenComparingWithOtherClass() {
+		Item item = new Item(order, "x", 1);
+		assertFalse(item.equals(order));
 	}
 	
 	@Test
