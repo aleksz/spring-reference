@@ -49,7 +49,7 @@ public class CreateOrderController {
 	}
 	
 	@RequestMapping(value = "/orders/add", method = GET)
-	public String createForm(Model model) {
+	public String createForm() {
 		return "addOrder";
 	}
 }
