@@ -49,11 +49,34 @@ public class WebDriverIT extends AbstractWebDriverTest {
 		addItemPageShowsErrorIfPriceIsNegative();
 		addItemPageShowsErrorIfQuantityIsLessThanOne();
 		addItemPageReturnsToEditOrderIfAllFieldsAreOk();
+		addItemPageShowsErrorIfOrderAlreadyHasItemWithSameProductAndPrice();
+		addItemPageAddsAnotherItemAndReturnsToEditOrder();
 		
-		addItemPageReturnsToOrdersListIfDeleteClicked();
+		editOrderPageReturnsToOrdersListIfDeleteClicked();
 	}
 	
-	private void addItemPageReturnsToOrdersListIfDeleteClicked() {
+	private void addItemPageShowsErrorIfOrderAlreadyHasItemWithSameProductAndPrice() {
+		addItemPage = editOrderPage
+				.clickAddItemLink()
+				.setProduct("test product")
+				.setPrice("2555.12")
+				.setQuantity("344234")
+				.clickSaveButtonAndExpectErrors();
+		
+		assertTrue(addItemPage.hasGeneralErrors());
+	}
+	
+	private void addItemPageAddsAnotherItemAndReturnsToEditOrder() {
+		editOrderPage = addItemPage
+				.setProduct("test product2")
+				.setPrice("2555.12")
+				.setQuantity("344234")
+				.clickSaveButton();
+		
+		assertTrue(editOrderPage.hasItem("test product2 344234 x 2555.12$"));
+	}
+	
+	private void editOrderPageReturnsToOrdersListIfDeleteClicked() {
 		ordersPage = editOrderPage.clickDeleteButton();
 		assertFalse(ordersPage.hasOrder(customerName));
 	}

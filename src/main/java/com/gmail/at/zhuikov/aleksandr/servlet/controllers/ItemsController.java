@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gmail.at.zhuikov.aleksandr.root.domain.DefaultItem;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
 import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 
@@ -55,7 +54,7 @@ public class ItemsController {
 	
 	@ModelAttribute
 	public Item prepareItem(@PathVariable Long orderId) {
-		return new DefaultItem(orderRepository.load(orderId));
+		return new Item(orderRepository.load(orderId), "", 0);
 	}
 	
 	@RequestMapping(value = "add", method = GET)

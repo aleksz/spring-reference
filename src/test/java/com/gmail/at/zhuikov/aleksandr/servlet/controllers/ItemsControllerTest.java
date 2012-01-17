@@ -16,7 +16,6 @@ import org.springframework.validation.BindException;
 import org.springframework.validation.DataBinder;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.gmail.at.zhuikov.aleksandr.root.domain.DefaultItem;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
@@ -46,7 +45,7 @@ public class ItemsControllerTest {
 	@Test
 	public void itemHasErrors() {
 		Order order = new Order("x");
-		Item item = new DefaultItem(order);
+		Item item = new Item(order, "p", 1);
 		BindException e = new BindException(item, "item");
 		ModelAndView mav = controller.itemHasErrors(e);
 		assertViewName(mav, "addItem");
