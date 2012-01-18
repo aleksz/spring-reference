@@ -1,16 +1,22 @@
+<%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!DOCTYPE html>
+
 <html>
-<head>
-	<title>Orders</title>
-</head>
-<body>
-	<c:forEach items="${orderList}" var="order">
-		<div>
-			<a href="orders/${order.id}">${order.customer} ${order.date}</a>
-		</div>
-	</c:forEach>
-	
-	<a href="orders/add">Add new order</a>
-</body>
+	<head>
+		<title>Orders</title>
+	</head>
+	<body>
+		<c:forEach items="${orderList}" var="order">
+			<div>
+				<a href="orders/${order.id}">${order.customer} ${order.date}</a>
+			</div>
+		</c:forEach>
+		
+		<a href="orders/add">
+			<fmt:message key="addNewOrder"/>
+		</a>
+	</body>
 </html>
