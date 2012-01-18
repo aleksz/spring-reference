@@ -130,6 +130,12 @@ public class ItemTest {
 	}
 	
 	@Test
+	public void equalsWhenComparingToItself() {
+		Item item = new Item(order, "x", 1);
+		assertEquals(item, item);
+	}
+	
+	@Test
 	public void itemsWithSameProductAndPriceAndOrderHaveSameHashCodel() {
 		Item item1 = new Item(order, "a", 5);
 		Item item2 = new Item(order, "a", 5);
