@@ -11,7 +11,10 @@
 	<body>
 		<c:forEach items="${orderList}" var="order">
 			<div>
-				<a href="orders/${order.id}">${order.customer} ${order.date}</a>
+				<a href="orders/${order.id}">
+					${order.customer} 
+					<fmt:formatDate value="${order.date}" type="both"/>
+				</a>
 			</div>
 		</c:forEach>
 		
