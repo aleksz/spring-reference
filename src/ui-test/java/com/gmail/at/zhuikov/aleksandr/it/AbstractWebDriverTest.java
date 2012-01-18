@@ -7,11 +7,16 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public abstract class AbstractWebDriverTest {
 
-	protected WebDriver driver = new FirefoxDriver();
+	protected WebDriver driver;
 	private final String relativeUrl;
 	
 	public AbstractWebDriverTest(String relativeUrl) {
 		this.relativeUrl = relativeUrl;
+		driver = createDriver();
+	}
+	
+	protected WebDriver createDriver() {
+		return new FirefoxDriver();
 	}
 	
 	@Before
