@@ -6,7 +6,9 @@
 
 <html>
 	<head>
-		<title>Orders</title>
+		<title>
+			<fmt:message key="ordersPageTitle"/>
+		</title>
 	</head>
 	<body>
 		<c:forEach items="${orderList}" var="order">
