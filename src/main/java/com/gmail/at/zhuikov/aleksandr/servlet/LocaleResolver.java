@@ -27,7 +27,6 @@ public class LocaleResolver implements org.springframework.web.servlet.LocaleRes
     }
   }
 
-  @SuppressWarnings("unchecked")
   @Override
   public Locale resolveLocale(HttpServletRequest request) {
 
@@ -40,7 +39,7 @@ public class LocaleResolver implements org.springframework.web.servlet.LocaleRes
       }
     }
 
-    return request.getLocale();
+    return Locale.ENGLISH;
   }
 
   @Override
