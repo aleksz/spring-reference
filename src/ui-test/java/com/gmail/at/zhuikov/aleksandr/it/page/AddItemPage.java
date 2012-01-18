@@ -65,7 +65,7 @@ public class AddItemPage extends AbstractPage {
 		return hasElement(By.id("quantity.errors"));
 	}
 	
-	public boolean hasGeneralErrors() {
-		return hasElement(By.id("item.errors"));
+	public boolean hasOrderErrors() {
+		return hasElement(By.id("order.*.errors"));
 	}
 }

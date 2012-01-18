@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
@@ -30,6 +31,7 @@ import org.springframework.core.style.ToStringCreator;
  */
 @Entity
 @Table(name = "T_ORDER")
+@GroupSequence({ Order.class, ComplexValidation.class })
 public class Order {
 
 	@Id
@@ -64,6 +66,7 @@ public class Order {
 	 * @return the items
 	 */
 	@Valid
+	@UniqueProductInOrder(groups = ComplexValidation.class)
 	public Collection<Item> getItems() {
 		return items;
 	}
@@ -132,3 +135,5 @@ public class Order {
 				.toHashCode();
 	}
 }
+
+interface ComplexValidation {}

@@ -63,7 +63,7 @@ public class WebDriverIT extends AbstractWebDriverTest {
 				.setQuantity("344234")
 				.clickSaveButtonAndExpectErrors();
 		
-		assertTrue(addItemPage.hasGeneralErrors());
+		assertTrue(addItemPage.hasOrderErrors());
 	}
 	
 	private void addItemPageAddsAnotherItemAndReturnsToEditOrder() {

@@ -11,7 +11,7 @@
 <body>
 	<c:url value="/orders/${item.order.id}/items" var="formActionUrl"/>
 	<form:form commandName="item" method="POST" action="${formActionUrl}">
-		<form:errors element="div"/>
+		<form:errors path="order.*" element="div"/>
 		<div>Product name: <form:input path="product"/></div>
 		<form:errors path="product" element="div"/>
 		<div>Price: <form:input path="price"/></div>

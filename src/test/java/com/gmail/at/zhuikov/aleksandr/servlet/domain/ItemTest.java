@@ -54,8 +54,10 @@ public class ItemTest {
 		
 		ReflectionTestUtils.setField(item2, "product", "x");
 		
+		new Item(order, "xx", 0);
+		
 		Set<ConstraintViolation<Item>> violations = validator.validate(item2);
-		assertFalse(violations.isEmpty());
+		assertEquals(2, violations.size());
 	}
 	
 	@Test

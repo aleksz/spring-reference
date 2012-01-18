@@ -1,6 +1,6 @@
 package com.gmail.at.zhuikov.aleksandr.root.domain;
 
-import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 import java.lang.annotation.Documented;
@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Target(TYPE)
+@Target(METHOD)
 @Retention(RUNTIME)
 @Constraint(validatedBy = UniqueProductInOrderValidator.class)
 @Documented

@@ -6,7 +6,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import javax.validation.constraints.Min;
 
@@ -20,8 +19,6 @@ import org.springframework.core.style.ToStringCreator;
  * An item in an order
  */
 @Entity
-@GroupSequence({ Item.class, ComplexValidation.class })
-@UniqueProductInOrder(groups = ComplexValidation.class)
 public class Item {
 
 	@Id
@@ -136,5 +133,3 @@ public class Item {
 				.toHashCode();
 	}
 }
-
-interface ComplexValidation {}
