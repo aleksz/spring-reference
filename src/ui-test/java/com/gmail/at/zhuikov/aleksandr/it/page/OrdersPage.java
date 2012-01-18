@@ -3,15 +3,13 @@ package com.gmail.at.zhuikov.aleksandr.it.page;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
 public class OrdersPage extends AbstractPage {
 
-	@FindBy(linkText = "Add new order")
+	@FindBy(id = "addNewOrder")
 	private WebElement addNewOrderLink;
 	
 	public OrdersPage(WebDriver driver) {
@@ -20,7 +18,11 @@ public class OrdersPage extends AbstractPage {
 
 	public AddOrderPage clickAddNewOrder() {
 		addNewOrderLink.click();
-		return PageFactory.initElements(driver, AddOrderPage.class);
+		return initElements(driver, AddOrderPage.class);
+	}
+	
+	public String getAddNewOrderLinkText() {
+		return addNewOrderLink.getText();
 	}
 	
 	public EditOrderPage clickOrder(String customerName) {
@@ -28,13 +30,11 @@ public class OrdersPage extends AbstractPage {
 		return initElements(driver, EditOrderPage.class);
 	}
 	
+	public String getOrderLinkText(String customerName) {
+		return driver.findElement(By.partialLinkText(customerName)).getText();
+	}
+	
 	public boolean hasOrder(String customerName) {
-		try {
-			driver.findElement(By.partialLinkText(customerName));
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-		
-		return true;
+		return hasElement(By.partialLinkText(customerName));
 	}
 }

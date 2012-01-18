@@ -18,7 +18,7 @@
 			</div>
 		</c:forEach>
 		
-		<a href="orders/add">
+		<a id="addNewOrder" href="orders/add">
 			<fmt:message key="addNewOrder"/>
 		</a>
 	</body>

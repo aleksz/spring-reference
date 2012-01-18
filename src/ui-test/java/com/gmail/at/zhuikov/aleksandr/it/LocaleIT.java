@@ -1,10 +1,14 @@
 package com.gmail.at.zhuikov.aleksandr.it;
 
+import static junit.framework.Assert.assertEquals;
+import static org.openqa.selenium.support.PageFactory.initElements;
+
 import org.junit.Test;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+
+import com.gmail.at.zhuikov.aleksandr.it.page.OrdersPage;
 
 public class LocaleIT extends AbstractWebDriverTest {
 
@@ -15,12 +19,13 @@ public class LocaleIT extends AbstractWebDriverTest {
 	@Override
 	protected WebDriver createDriver() {
 		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("intl.accept_languages", "ru" );
+		profile.setPreference("intl.accept_languages", "ru");
 		return new FirefoxDriver(profile);
 	}
 	
 	@Test
-	public void test() throws Exception {
-		driver.findElement(By.partialLinkText("Добавить новый заказ"));
+	public void checkLocalizationOnOrdersPage() throws Exception {
+		OrdersPage page = initElements(driver, OrdersPage.class);
+		assertEquals("Добавить новый заказ", page.getAddNewOrderLinkText());
 	}
 }
