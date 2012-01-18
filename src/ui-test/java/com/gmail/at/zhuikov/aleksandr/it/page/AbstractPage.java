@@ -14,7 +14,7 @@ public abstract class AbstractPage {
 	
 	protected boolean hasElement(By selector) {
 		try {
-			driver.findElements(selector);
+			driver.findElement(selector);
 		} catch (NoSuchElementException e) {
 			return false;
 		}
