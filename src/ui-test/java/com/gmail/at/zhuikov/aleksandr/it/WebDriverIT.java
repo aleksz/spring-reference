@@ -23,7 +23,7 @@ public class WebDriverIT extends AbstractWebDriverTest {
 	private AddItemPage addItemPage;
 
 	public WebDriverIT() {
-		super("orders");
+		super("");
 	}
 
 	@Before 
