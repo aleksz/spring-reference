@@ -31,7 +31,9 @@
 	</form:form>
 	
 	<c:forEach items="${order.items}" var="item">
-		<div class="item">${item.product} ${item.quantity} x ${item.price}$</div>
+		<div class="item">${item.product} ${item.quantity} x
+			<fmt:formatNumber type="currency" value="${item.price}" currencySymbol="$"/>
+		</div>
 	</c:forEach>
 	
 	<a href="${formActionUrl}/items/add">
