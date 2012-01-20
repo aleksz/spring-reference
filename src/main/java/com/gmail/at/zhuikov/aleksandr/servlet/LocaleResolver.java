@@ -1,5 +1,7 @@
 package com.gmail.at.zhuikov.aleksandr.servlet;
 
+import static java.util.Locale.ENGLISH;
+
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Locale;
@@ -9,9 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.servlet.i18n.AbstractLocaleResolver;
 
 @Component("localeResolver")
-public class LocaleResolver implements org.springframework.web.servlet.LocaleResolver {
+public class LocaleResolver extends AbstractLocaleResolver {
 
   private Set<String> supportedLocales = new HashSet<String>();
 
@@ -25,6 +28,8 @@ public class LocaleResolver implements org.springframework.web.servlet.LocaleRes
         supportedLocales.add(l.toString());
       }
     }
+    
+    setDefaultLocale(ENGLISH);
   }
 
   @Override
@@ -39,7 +44,7 @@ public class LocaleResolver implements org.springframework.web.servlet.LocaleRes
       }
     }
 
-    return Locale.ENGLISH;
+    return getDefaultLocale();
   }
 
   @Override
