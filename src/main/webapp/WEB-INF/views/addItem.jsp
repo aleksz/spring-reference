@@ -1,24 +1,28 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 
 <html>
-<head>
-	<title>Order</title>
-</head>
-<body>
-	<c:url value="/orders/${item.order.id}/items" var="formActionUrl"/>
-	<form:form commandName="item" method="POST" action="${formActionUrl}">
-		<form:errors path="order.*" element="div"/>
-		<div>Product name: <form:input path="product"/></div>
-		<form:errors path="product" element="div"/>
-		<div>Price: <form:input path="price"/></div>
-		<form:errors path="price" element="div"/>
-		<div>Quantity: <form:input path="quantity"/></div>
-		<form:errors path="quantity" element="div"/>
-		<input type="submit" name="save" value="Save"/>
-	</form:form>
-</body>
+	<head>
+		<title>
+			<fmt:message key="addItemPageTitle"/>
+		</title>
+	</head>
+	<body>
+		<c:url value="/orders/${item.order.id}/items" var="formActionUrl"/>
+		<form:form commandName="item" method="POST" action="${formActionUrl}">
+			<form:errors path="order.*" element="div"/>
+			<div><fmt:message key="order.item.product"/>: <form:input path="product"/></div>
+			<form:errors path="product" element="div"/>
+			<div><fmt:message key="order.item.price"/>: <form:input path="price"/></div>
+			<form:errors path="price" element="div"/>
+			<div><fmt:message key="order.item.quantity"/>: <form:input path="quantity"/></div>
+			<form:errors path="quantity" element="div"/>
+			<fmt:message key="saveButton" var="translatedSave"/>
+			<input type="submit" name="save" value="${translatedSave}"/>
+		</form:form>
+	</body>
 </html>
