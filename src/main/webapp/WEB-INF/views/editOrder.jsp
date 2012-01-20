@@ -16,7 +16,7 @@
 	
 	<form:form commandName="order" method="POST" action="${formActionUrl}">
 		<div>
-			<span><fmt:message key="order.customerName"/>:</span>
+			<span><fmt:message key="order.customerName"/>: </span>
 			<span id="customerLabel">${order.customer}</span>
 		</div>
 		<div><fmt:message key="order.email"/>: <form:input path="email"/></div>
