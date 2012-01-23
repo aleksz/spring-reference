@@ -348,4 +348,9 @@
 			</snapshots>
 		</repository>
 	</repositories>
+	<scm>
+		<connection>scm:git:git@github.com:aleksz/spring-reference.git</connection>
+		<url>scm:git:git@github.com:aleksz/spring-reference.git</url>
+		<developerConnection>scm:git:git@github.com:aleksz/spring-reference.git</developerConnection>
+	</scm>
 </project>
