@@ -10,6 +10,8 @@
 	<title>
 		<fmt:message key="editOrderPageTitle"/>
 	</title>
+	<c:url value="/resources/css/common.css" var="commonCssUrl"/>
+	<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
 </head>
 <body>
 	<c:url value="/orders/${order.id}" var="formActionUrl"/>
@@ -20,7 +22,7 @@
 			<span id="customerLabel">${order.customer}</span>
 		</div>
 		<div><fmt:message key="order.email"/>: <form:input path="email"/></div>
-		<form:errors path="email" element="div"/>
+		<form:errors path="email" element="div" cssClass="error"/>
 		<fmt:message key="saveButton" var="translatedSave"/>
 		<input type="submit" name="save" value="${translatedSave}"/>
 	</form:form>
