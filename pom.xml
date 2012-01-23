@@ -263,6 +263,9 @@
 						</goals>
 					</execution>
 				</executions>
+				<configuration>
+					<parallel>classes</parallel>
+				</configuration>
 			</plugin>
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
