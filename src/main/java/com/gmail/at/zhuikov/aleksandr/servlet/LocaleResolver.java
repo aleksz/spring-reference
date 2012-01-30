@@ -16,40 +16,41 @@ import org.springframework.web.servlet.i18n.AbstractLocaleResolver;
 @Component("localeResolver")
 public class LocaleResolver extends AbstractLocaleResolver {
 
-  private Set<String> supportedLocales = new HashSet<String>();
+	private Set<String> supportedLocales = new HashSet<String>();
 
-  {
-    for (Locale l : Locale.getAvailableLocales()) {
+	{
+		for (Locale l : Locale.getAvailableLocales()) {
 
-      String name = "/translations";
-      name += "_" + l + ".properties";
+			String name = "/translations";
+			name += "_" + l + ".properties";
 
-      if (getClass().getResourceAsStream(name) != null) {
-        supportedLocales.add(l.toString());
-      }
-    }
-    
-    setDefaultLocale(ENGLISH);
-  }
+			if (getClass().getResourceAsStream(name) != null) {
+				supportedLocales.add(l.toString());
+			}
+		}
 
-  @Override
-  public Locale resolveLocale(HttpServletRequest request) {
+		setDefaultLocale(ENGLISH);
+	}
 
-    Enumeration<Locale> locales = request.getLocales();
+	@Override
+	public Locale resolveLocale(HttpServletRequest request) {
 
-    while (locales.hasMoreElements()) {
-      Locale l = locales.nextElement();
-      if (supportedLocales.contains(l.toString())) {
-        return l;
-      }
-    }
+		Enumeration<Locale> locales = request.getLocales();
 
-    return getDefaultLocale();
-  }
+		while (locales.hasMoreElements()) {
+			Locale l = locales.nextElement();
+			if (supportedLocales.contains(l.toString())) {
+				return l;
+			}
+		}
 
-  @Override
-  public void setLocale(HttpServletRequest request, HttpServletResponse response, Locale locale) {
-    throw new UnsupportedOperationException(
-      "Cannot change HTTP accept header - use a different locale resolution strategy");
-  }
+		return getDefaultLocale();
+	}
+
+	@Override
+	public void setLocale(HttpServletRequest request,
+			HttpServletResponse response, Locale locale) {
+		throw new UnsupportedOperationException(
+				"Cannot change HTTP accept header - use a different locale resolution strategy");
+	}
 }
