@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/security" 
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xsi:schemaLocation="
+			http://www.springframework.org/schema/security
+			http://www.springframework.org/schema/security/spring-security-3.1.xsd
+			http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <http pattern="/openIdLogin.jsp*" security="none" />
+    <http pattern="/resources/img/*" security="none" />
+    <http pattern="/resources/css/*" security="none" />
+    <http pattern="/resources/js/*" security="none" />
+
+	<http>
+		<intercept-url pattern="/**" access="ROLE_USER" />
+		<logout/>
+		<openid-login login-page="/openIdLogin.jsp">
+		 	<attribute-exchange identifier-match="https://www.google.com/.*">
+	           <!--  <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
+	            <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
+	            <openid-attribute name="lastname" type="http://axschema.org/namePerson/last" required="true" /> -->
+	            <openid-attribute name="language" type="http://axschema.org/pref/language" required="true" count="1"/>
+	            <openid-attribute name="country" type="http://axschema.org/contact/country/home" required="true" count="1"/>
+            </attribute-exchange>
+            <attribute-exchange identifier-match=".*myopenid.com.*">
+                <!-- <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true"/>
+                <openid-attribute name="fullname" type="http://schema.openid.net/namePerson" required="true" /> -->
+                <openid-attribute name="language" type="http://schema.openid.net/pref/language" required="true" count="1"/>
+                <openid-attribute name="country" type="http://schema.openid.net/contact/country/home" required="true" count="1"/>
+            </attribute-exchange>
+		</openid-login>
+	</http>
+
+	<authentication-manager alias="authenticationManager"/>
+
+</beans:beans>

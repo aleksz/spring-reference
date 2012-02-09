@@ -38,7 +38,7 @@
 		</div>
 	</c:forEach>
 	
-	<a href="${formActionUrl}/items/add">
+	<a id="addItemUrl" href="${formActionUrl}/items/add">
 		<fmt:message key="addItem"/>
 	</a>
 	

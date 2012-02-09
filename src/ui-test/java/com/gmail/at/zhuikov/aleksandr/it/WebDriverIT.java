@@ -11,6 +11,7 @@ import org.junit.Test;
 import com.gmail.at.zhuikov.aleksandr.it.page.AddItemPage;
 import com.gmail.at.zhuikov.aleksandr.it.page.AddOrderPage;
 import com.gmail.at.zhuikov.aleksandr.it.page.EditOrderPage;
+import com.gmail.at.zhuikov.aleksandr.it.page.LoginPage;
 import com.gmail.at.zhuikov.aleksandr.it.page.OrdersPage;
 
 public class WebDriverIT extends AbstractWebDriverTest {
@@ -28,6 +29,10 @@ public class WebDriverIT extends AbstractWebDriverTest {
 
 	@Before 
 	public void initFirstPage() {
+		
+		initElements(driver, LoginPage.class)
+			.loginWithMyOpenId("spring-reference-admin", "5ybQ58oN");
+		
 		addOrderPage = initElements(driver, OrdersPage.class)
 				.clickAddNewOrder();
 	}

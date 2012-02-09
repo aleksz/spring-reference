@@ -24,7 +24,7 @@ public class EditOrderPage extends AbstractPage {
 	@FindBy(name = "delete")
 	private WebElement deleteButton;
 	
-	@FindBy(partialLinkText = "Add item")
+	@FindBy(id = "addItemUrl")
 	private WebElement addItemLink;
 	
 	public EditOrderPage(WebDriver driver) {

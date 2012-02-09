@@ -11,6 +11,8 @@
 	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 	http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd">
 	
+	<import resource="security.xml"/>
+	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:component-scan base-package="com.gmail.at.zhuikov.aleksandr.root" />
 
