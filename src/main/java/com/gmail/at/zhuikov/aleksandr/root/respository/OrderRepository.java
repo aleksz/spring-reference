@@ -1,18 +1,9 @@
 package com.gmail.at.zhuikov.aleksandr.root.respository;
 
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
-public interface OrderRepository {
+public interface OrderRepository extends JpaRepository<Order, Long>{
 
-	List<Order> getAll();
-	
-	void save(Order order);
-	
-	void update(Order order);
-	
-	Order load(long id);
-	
-	void delete(Order order);
 }

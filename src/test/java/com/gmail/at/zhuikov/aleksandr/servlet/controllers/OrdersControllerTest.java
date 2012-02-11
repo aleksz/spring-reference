@@ -31,7 +31,7 @@ public class OrdersControllerTest {
 	@Test
 	public void test() {
 		List<Order> orders = asList(new Order("a"), new Order("b"));
-		when(orderRepository.getAll()).thenReturn(orders);
+		when(orderRepository.findAll()).thenReturn(orders);
 		List<Order> result = controller.loadAllOrders();
 		assertEquals(orders, result);
 	}

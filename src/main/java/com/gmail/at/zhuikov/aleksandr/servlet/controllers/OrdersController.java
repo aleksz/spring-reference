@@ -26,7 +26,7 @@ public class OrdersController {
 	
 	@ModelAttribute
 	public List<Order> loadAllOrders() {
-		return orderRepository.getAll();
+		return orderRepository.findAll();
 	}
 	
 	@RequestMapping(value = "/orders", method = GET)

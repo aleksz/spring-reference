@@ -50,7 +50,7 @@ public class OrderControllerTest {
 	@Test
 	public void test() {
 		Order expected = new Order("x");
-		when(orderRepository.load(2)).thenReturn(expected);
+		when(orderRepository.findOne(2L)).thenReturn(expected);
 		Order order = controller.prepareOrder(2L);
 		assertEquals(expected, order);
 	}
@@ -62,7 +62,7 @@ public class OrderControllerTest {
 		Model model = new ExtendedModelMap();
 		
 		String view = controller.update(order, errors, model);
-		verify(orderRepository).update(order);
+		verify(orderRepository).save(order);
 		assertEquals("redirect:/orders", view);
 	}
 	

@@ -46,7 +46,7 @@ public class ItemsController {
 	
 	@ModelAttribute
 	public Item prepareItem(@PathVariable Long orderId) {
-		return new Item(orderRepository.load(orderId), "", 0);
+		return new Item(orderRepository.findOne(orderId), "", 0);
 	}
 	
 	@RequestMapping(value = "add", method = GET)
@@ -57,7 +57,7 @@ public class ItemsController {
 	@RequestMapping(method = POST)
 	public String create(@Valid Item item) {
 		LOG.info("Adding item " + item);
-		orderRepository.update(item.getOrder());
+		orderRepository.save(item.getOrder());
 		return "redirect:/orders/" + item.getOrder().getId();
 	}
 }

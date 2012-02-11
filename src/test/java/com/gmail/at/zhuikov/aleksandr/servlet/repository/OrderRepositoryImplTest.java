@@ -30,7 +30,7 @@ public class OrderRepositoryImplTest {
 	
 	@Test
 	public void loadMissingObject() {
-		assertNull(repository.load(1234234));
+		assertNull(repository.findOne(1234234L));
 	}
 	
 	@Test
@@ -43,7 +43,7 @@ public class OrderRepositoryImplTest {
 		order2.setEmail("mail@example.com");
 		em.persist(order2);
 		
-		List<Order> all = repository.getAll();
+		List<Order> all = repository.findAll();
 		assertEquals(2, all.size());
 		assertTrue(all.contains(order1));
 		assertTrue(all.contains(order2));
@@ -55,7 +55,7 @@ public class OrderRepositoryImplTest {
 		order.setEmail("mail@example.com");
 		em.persist(order);
 		order.setEmail("changed@example.com");
-		repository.update(order);
+		repository.save(order);
 		order = em.find(Order.class, order.getId());
 		assertEquals("changed@example.com", order.getEmail());
 	}
@@ -87,6 +87,6 @@ public class OrderRepositoryImplTest {
 	@Test(expected = ConstraintViolationException.class)
 	public void updateValidatesOrder() {
 		Order invalidOrder = new Order("");
-		repository.update(invalidOrder);
+		repository.save(invalidOrder);
 	}
 }

@@ -39,7 +39,7 @@ public class OrderController {
 	
 	@ModelAttribute
 	public Order prepareOrder(@PathVariable Long id) {
-		Order order = orderRepository.load(id);
+		Order order = orderRepository.findOne(id);
 		return order;
 	}
 	
@@ -64,7 +64,7 @@ public class OrderController {
 		}
 		
 		LOG.info("Updating " + order);
-		orderRepository.update(order);
+		orderRepository.save(order);
 		
 		return "redirect:/orders";
 	}

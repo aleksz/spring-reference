@@ -55,7 +55,7 @@ public class ItemsControllerTest {
 	@Test
 	public void prepareItem() {
 		Order order = new Order("x");
-		when(orderRepository.load(2)).thenReturn(order);
+		when(orderRepository.findOne(2L)).thenReturn(order);
 		Item item = controller.prepareItem(2L);
 		assertEquals(order, item.getOrder());
 		assertEquals("", item.getProduct());
@@ -67,7 +67,7 @@ public class ItemsControllerTest {
 		Order order = new Order("x");
 		ReflectionTestUtils.setField(order, "id", 2L);
 		String view = controller.create(new Item(order, "p", 1.1));
-		verify(orderRepository).update(order);
+		verify(orderRepository).save(order);
 		assertEquals("redirect:/orders/2", view);
 	}
 	
