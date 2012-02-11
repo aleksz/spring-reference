@@ -1,6 +1,5 @@
 package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.DELETE;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -9,17 +8,14 @@ import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
@@ -36,11 +32,6 @@ public class OrderController {
 	@Inject
 	private OrderRepository orderRepository;
 	
-	@ResponseStatus(value = NOT_FOUND)
-	@ExceptionHandler(ObjectNotFoundException.class)
-	public void objectNotFound() {
-	}
-	
 	@ModelAttribute("remoteAddr")
 	public String getRemoteAddr(HttpServletRequest request) {
 		return request.getRemoteAddr();
@@ -48,7 +39,8 @@ public class OrderController {
 	
 	@ModelAttribute
 	public Order prepareOrder(@PathVariable Long id) {
-		return orderRepository.load(id);
+		Order order = orderRepository.load(id);
+		return order;
 	}
 	
 	@RequestMapping(method = GET)

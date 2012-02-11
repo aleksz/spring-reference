@@ -1,51 +1,55 @@
 package com.gmail.at.zhuikov.aleksandr.root.respository;
 
-import static org.hibernate.criterion.DetachedCriteria.forClass;
-
 import java.util.List;
 
-import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 
-import org.springframework.orm.hibernate3.HibernateTemplate;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 
 @Repository
-public class OrderRepositoryImpl extends HibernateDaoSupport implements OrderRepository {
+public class OrderRepositoryImpl implements OrderRepository {
 
-	@Inject
-	public OrderRepositoryImpl(HibernateTemplate hibernateTemplate) {
-		setHibernateTemplate(hibernateTemplate);
-	}
+	@PersistenceContext
+    private EntityManager em;
+	
+	public void setEntityManager(EntityManager em) {
+        this.em = em;
+    }
 	
 	@Override
 	@Transactional
 	public void update(Order order) {
-		getHibernateTemplate().saveOrUpdate(order);
+		em.persist(order);
 	}
 
 	@Override
 	public Order load(long id) {
-		return getHibernateTemplate().load(Order.class, id);
+		return em.find(Order.class, id);
 	}
 
 	@Override
 	@Transactional
 	public void delete(Order order) {
-		getHibernateTemplate().delete(order);
+		em.remove(order);
 	}
 
 	@Override
 	@Transactional
 	public void save(Order order) {
-		getHibernateTemplate().save(order);
+		em.persist(order);
 	}
 
 	@Override
 	public List<Order> getAll() {
-		return getHibernateTemplate().findByCriteria(forClass(Order.class));
+		CriteriaBuilder builder = em.getCriteriaBuilder();
+		CriteriaQuery<Order> query = builder.createQuery(Order.class);
+		query.from(Order.class);
+		return em.createQuery(query).getResultList();
 	}
 }

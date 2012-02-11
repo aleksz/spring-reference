@@ -20,15 +20,15 @@
 	</filter-mapping>
 	
 	<filter>
-		<filter-name>OpenSessionInViewFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-name>OpenEntityManagerInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
 	</filter>
 	
 	<filter-mapping>
-		<filter-name>OpenSessionInViewFilter</filter-name>
+		<filter-name>OpenEntityManagerInViewFilter</filter-name>
 		<url-pattern>*</url-pattern>
 	</filter-mapping>
-
+	
 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>

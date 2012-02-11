@@ -7,12 +7,12 @@ import static junit.framework.Assert.assertTrue;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
 
-import org.hibernate.ObjectNotFoundException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,23 +26,22 @@ import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
 public class OrderRepositoryImplTest {
 
 	@Inject OrderRepository repository;
-	@Inject HibernateTemplate hibernate;
+	@PersistenceContext EntityManager em;
 	
-	@Test(expected = ObjectNotFoundException.class)
+	@Test
 	public void loadMissingObject() {
-		Order order = repository.load(1234234);
-		order.getId();
+		assertNull(repository.load(1234234));
 	}
 	
 	@Test
 	public void getAll() {
 		Order order1 = new Order("theCustomer");
 		order1.setEmail("mail@example.com");
-		hibernate.save(order1);
+		em.persist(order1);
 		
 		Order order2 = new Order("secondCustomer");
 		order2.setEmail("mail@example.com");
-		hibernate.save(order2);
+		em.persist(order2);
 		
 		List<Order> all = repository.getAll();
 		assertEquals(2, all.size());
@@ -54,10 +53,10 @@ public class OrderRepositoryImplTest {
 	public void update() {
 		Order order = new Order("theCustomer");
 		order.setEmail("mail@example.com");
-		hibernate.save(order);
+		em.persist(order);
 		order.setEmail("changed@example.com");
 		repository.update(order);
-		order = hibernate.load(Order.class, order.getId());
+		order = em.find(Order.class, order.getId());
 		assertEquals("changed@example.com", order.getEmail());
 	}
 	
@@ -66,7 +65,7 @@ public class OrderRepositoryImplTest {
 		Order order = new Order("theCustomer");
 		order.setEmail("mail@example.com");
 		repository.save(order);
-		Order reloaded = hibernate.load(Order.class, order.getId());
+		Order reloaded = em.find(Order.class, order.getId());
 		assertEquals(order, reloaded);
 	}
 	
@@ -74,9 +73,9 @@ public class OrderRepositoryImplTest {
 	public void delete() {
 		Order order = new Order("theCustomer");
 		order.setEmail("mail@example.com");
-		hibernate.save(order);
+		em.persist(order);
 		repository.delete(order);
-		assertNull(hibernate.get(Order.class, order.getId()));
+		assertNull(em.find(Order.class, order.getId()));
 	}
 	
 	@Test(expected = ConstraintViolationException.class)

@@ -1,13 +1,11 @@
 package com.gmail.at.zhuikov.aleksandr.servlet.controllers;
 
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
-import org.hibernate.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
@@ -32,11 +29,6 @@ public class ItemsController {
 	
 	@Inject
 	private OrderRepository orderRepository;
-	
-	@ResponseStatus(value = NOT_FOUND)
-	@ExceptionHandler(ObjectNotFoundException.class)
-	public void objectNotFound() {
-	}
 	
 	@ExceptionHandler(BindException.class)
 	public ModelAndView itemHasErrors(BindException e) {
