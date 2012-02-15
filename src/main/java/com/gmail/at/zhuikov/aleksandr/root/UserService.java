@@ -1,5 +1,6 @@
 package com.gmail.at.zhuikov.aleksandr.root;
 
+import static com.gmail.at.zhuikov.aleksandr.root.domain.GrantedAuthority.USER;
 import static org.springframework.util.StringUtils.hasText;
 
 import java.util.List;
@@ -9,8 +10,6 @@ import javax.inject.Inject;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.AuthenticationUserDetailsService;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -25,7 +24,6 @@ import com.gmail.at.zhuikov.aleksandr.root.respository.UserRepository;
 public class UserService implements AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
 
 	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-	private static final List<GrantedAuthority> DEFAULT_AUTHORITIES = AuthorityUtils.createAuthorityList("ROLE_USER");
 	
 	@Inject
 	private UserRepository userRepository;
@@ -36,10 +34,11 @@ public class UserService implements AuthenticationUserDetailsService<OpenIDAuthe
 		
 		String id = token.getIdentityUrl();
 
-        User user = userRepository.find(id);
+        User user = userRepository.findOne(id);
 		
         if (user == null) {
-        	user = new User(id, DEFAULT_AUTHORITIES);
+        	user = new User(id);
+        	user.getAuthorities().add(USER);
         }
 
         String country = null;

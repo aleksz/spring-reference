@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
 
-import java.util.Collections;
 import java.util.Locale;
 
 import org.junit.Before;
@@ -12,7 +11,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 
@@ -35,7 +33,7 @@ public class LocaleResolverTest {
 	
 	@Test
 	public void selectsLocaleFromPrincipal() {
-		User user = new User("usernate", Collections.<GrantedAuthority>emptyList());
+		User user = new User("username");
 		user.setLocale(new Locale("ru"));
 		request.setUserPrincipal(principal);
 		when(principal.getPrincipal()).thenReturn(user);
@@ -44,7 +42,7 @@ public class LocaleResolverTest {
 	
 	@Test
 	public void selectsRequestLocaleIfPrincipalDoesNotHaveLocale() {
-		User user = new User("usernate", Collections.<GrantedAuthority>emptyList());
+		User user = new User("username");
 		request.setUserPrincipal(principal);
 		when(principal.getPrincipal()).thenReturn(user);
 		request.addPreferredLocale(new Locale("ru"));
@@ -53,7 +51,7 @@ public class LocaleResolverTest {
 	
 	@Test
 	public void selectsRequestLocaleIfPrincipalHasUnsupportedLocale() {
-		User user = new User("usernate", Collections.<GrantedAuthority>emptyList());
+		User user = new User("username");
 		user.setLocale(new Locale("jp"));
 		request.setUserPrincipal(principal);
 		when(principal.getPrincipal()).thenReturn(user);

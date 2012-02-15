@@ -13,8 +13,8 @@
     <http pattern="/resources/css/*" security="none" />
     <http pattern="/resources/js/*" security="none" />
 
-	<http>
-		<intercept-url pattern="/**" access="ROLE_USER" />
+	<http use-expressions="true">
+		<intercept-url pattern="/**" access="hasRole('USER')" />
 		<logout/>
 		<openid-login login-page="/openIdLogin.jsp">
 		 	<attribute-exchange identifier-match="https://www.google.com/.*">

@@ -2,22 +2,37 @@ package com.gmail.at.zhuikov.aleksandr.root.respository;
 
 import static junit.framework.Assert.assertEquals;
 
-import java.util.Collections;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 import org.junit.Test;
-import org.springframework.security.core.GrantedAuthority;
+import org.junit.runner.RunWith;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("/root-context.xml")
+@Transactional
 public class UserRepositoryImplTest {
 
-	private UserRepository userRepository = new UserRepositoryImpl();
+	@Inject UserRepository repository;
+	@PersistenceContext EntityManager em;
 	
 	@Test
-	public void findsSavedUser() {
-		User user = new User("username", Collections.<GrantedAuthority>emptyList());
-		userRepository.save(user);
-		assertEquals(user, userRepository.find("username"));
+	public void findsUserById() {
+		User user = new User("username");
+		em.persist(user);
+		assertEquals(user, repository.findOne("username"));
 	}
 
+	@Test
+	public void saveUser() {
+		User user = new User("username");
+		repository.save(user);
+		assertEquals(user, em.find(User.class, "username"));
+	}
 }

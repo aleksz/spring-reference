@@ -1,5 +1,6 @@
 package com.gmail.at.zhuikov.aleksandr.root;
 
+import static com.gmail.at.zhuikov.aleksandr.root.domain.GrantedAuthority.USER;
 import static java.util.Arrays.asList;
 import static junit.framework.Assert.assertNull;
 import static junit.framework.Assert.assertTrue;
@@ -16,8 +17,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 
@@ -42,11 +41,11 @@ public class UserServiceTest {
 				"message",
 				Collections.<OpenIDAttribute>emptyList());
 		
-		when(userRepository.find("identity")).thenReturn(null);
+		when(userRepository.findOne("identity")).thenReturn(null);
 		
 		User user = (User) service.loadUserDetails(token);
 		
-		assertTrue(user.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_USER")));
+		assertTrue(user.getAuthorities().contains(USER));
 		verify(userRepository).save(user);
 	}
 	
@@ -58,7 +57,7 @@ public class UserServiceTest {
 				"message",
 				asList(countryAttribute(), languageAttribute()));
 		
-		when(userRepository.find("identity")).thenReturn(null);
+		when(userRepository.findOne("identity")).thenReturn(null);
 		
 		User user = (User) service.loadUserDetails(token);
 		
@@ -89,9 +88,9 @@ public class UserServiceTest {
 				"message",
 				asList(countryAttribute()));
 		
-		User knownUser = new User("identity", Collections.<GrantedAuthority>emptyList());
+		User knownUser = new User("identity");
 		knownUser.setLocale(new Locale("est", "EE"));
-		when(userRepository.find("identity")).thenReturn(knownUser);
+		when(userRepository.findOne("identity")).thenReturn(knownUser);
 		
 		User user = (User) service.loadUserDetails(token);
 		
@@ -107,7 +106,7 @@ public class UserServiceTest {
 				"message",
 				asList(countryAttribute()));
 		
-		when(userRepository.find("identity")).thenReturn(null);
+		when(userRepository.findOne("identity")).thenReturn(null);
 		
 		User user = (User) service.loadUserDetails(token);
 		
