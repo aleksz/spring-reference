@@ -26,9 +26,6 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.core.style.ToStringCreator;
 
 
-/**
- * An order.
- */
 @Entity
 @Table(name = "T_ORDER")
 @GroupSequence({ Order.class, ComplexValidation.class })
