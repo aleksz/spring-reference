@@ -15,9 +15,6 @@ import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
 
 
-/**
- * An item in an order
- */
 @Entity
 public class Item {
 
@@ -44,49 +41,30 @@ public class Item {
 		order.getItems().add(this);
 	}
 
-	/**
-	 * @return the order
-	 */
 	@Valid
 	public Order getOrder() {
 		return order;
 	}
 
-	/**
-	 * @return the product
-	 */
 	@NotBlank
 	public String getProduct() {
 		return product;
 	}
 
-	/**
-	 * @return the price
-	 */
 	@Min(0)
 	public double getPrice() {
 		return price;
 	}
 
-	/**
-	 * @return the quantity
-	 */
 	@Min(1)
 	public int getQuantity() {
 		return quantity;
 	}
 
-	/**
-	 * @param quantity
-	 *            the quantity to set
-	 */
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Long getId() {
 		return id;
 	}
