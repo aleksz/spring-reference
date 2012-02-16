@@ -37,4 +37,8 @@ public class OrdersPage extends AbstractPage {
 	public boolean hasOrder(String customerName) {
 		return hasElement(By.partialLinkText(customerName));
 	}
+	
+	public boolean hasPages() {
+		return hasElement(By.id("pages"));
+	}
 }

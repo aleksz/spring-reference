@@ -33,12 +33,12 @@ public class WebDriverIT extends AbstractWebDriverTest {
 		initElements(driver, LoginPage.class)
 			.loginWithMyOpenId("spring-reference-admin", "5ybQ58oN");
 		
-		addOrderPage = initElements(driver, OrdersPage.class)
-				.clickAddNewOrder();
+		ordersPage = initElements(driver, OrdersPage.class);
 	}
 	
 	@Test
 	public void userCreatesOrder() {
+		addOrderPage = ordersPage.clickAddNewOrder();
 
 		addOrderPageShowsErrorIfCustomerFieldIsEmpty();
 		addOrderPageShowsErrorIfEmailIsIllegal();
@@ -58,6 +58,20 @@ public class WebDriverIT extends AbstractWebDriverTest {
 		addItemPageAddsAnotherItemAndReturnsToEditOrder();
 		
 		editOrderPageReturnsToOrdersListIfDeleteClicked();
+	}
+	
+	@Test
+	public void pagesAppearWhenMoreThanTwentyOrders() {
+		
+		for (int i = 0; i < 21; i++) {
+			ordersPage = ordersPage
+				.clickAddNewOrder()
+				.setCustomer(customerName)
+				.setEmail("mail@example.com")
+				.clickSaveButton();
+		}
+		
+		assertTrue(ordersPage.hasPages());
 	}
 	
 	private void addItemPageShowsErrorIfOrderAlreadyHasItemWithSameProductAndPrice() {
