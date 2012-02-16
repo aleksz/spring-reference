@@ -53,13 +53,19 @@ public class ItemsControllerTest {
 	}
 	
 	@Test
-	public void prepareItem() {
+	public void prepareItem() throws OrderNotFoundException {
 		Order order = new Order("x");
 		when(orderRepository.findOne(2L)).thenReturn(order);
 		Item item = controller.prepareItem(2L);
 		assertEquals(order, item.getOrder());
 		assertEquals("", item.getProduct());
 		assertEquals(0.0, item.getPrice());
+	}
+	
+	@Test(expected = OrderNotFoundException.class)
+	public void prepareItemThrowsExceptionIfOrderNotFound() throws OrderNotFoundException {
+		when(orderRepository.findOne(2L)).thenReturn(null);
+		controller.prepareItem(2L);
 	}
 	
 	@Test

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
+import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 @Controller
@@ -45,8 +46,14 @@ public class ItemsController {
 	}
 	
 	@ModelAttribute
-	public Item prepareItem(@PathVariable Long orderId) {
-		return new Item(orderRepository.findOne(orderId), "", 0);
+	public Item prepareItem(@PathVariable Long orderId) throws OrderNotFoundException {
+		Order order = orderRepository.findOne(orderId);
+		
+		if (order == null) {
+			throw new OrderNotFoundException();
+		}
+		
+		return new Item(order, "", 0);
 	}
 	
 	@RequestMapping(value = "add", method = GET)

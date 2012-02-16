@@ -38,8 +38,14 @@ public class OrderController {
 	}
 	
 	@ModelAttribute
-	public Order prepareOrder(@PathVariable Long id) {
-		return orderRepository.findOne(id);
+	public Order prepareOrder(@PathVariable Long id) throws OrderNotFoundException {
+		Order order = orderRepository.findOne(id);
+		
+		if (order == null) {
+			throw new OrderNotFoundException();
+		}
+		
+		return order;
 	}
 	
 	@RequestMapping(method = GET)
