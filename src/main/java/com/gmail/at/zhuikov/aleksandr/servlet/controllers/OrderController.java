@@ -39,8 +39,7 @@ public class OrderController {
 	
 	@ModelAttribute
 	public Order prepareOrder(@PathVariable Long id) {
-		Order order = orderRepository.findOne(id);
-		return order;
+		return orderRepository.findOne(id);
 	}
 	
 	@RequestMapping(method = GET)
