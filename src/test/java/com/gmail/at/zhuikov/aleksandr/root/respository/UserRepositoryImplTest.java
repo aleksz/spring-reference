@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
+import com.gmail.at.zhuikov.aleksandr.root.repository.UserRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/root-context.xml")

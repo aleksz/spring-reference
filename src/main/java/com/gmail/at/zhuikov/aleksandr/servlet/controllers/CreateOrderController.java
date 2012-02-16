@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndViewDefiningException;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 
 @Controller

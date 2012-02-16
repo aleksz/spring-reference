@@ -21,7 +21,7 @@ import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
-import com.gmail.at.zhuikov.aleksandr.root.respository.UserRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.UserRepository;
 
 public class UserServiceTest {
 

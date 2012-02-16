@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
-import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 @Controller
 @RequestMapping("/orders/{orderId}/items")

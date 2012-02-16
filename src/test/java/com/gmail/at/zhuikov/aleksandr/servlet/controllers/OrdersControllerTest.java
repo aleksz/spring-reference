@@ -13,7 +13,7 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 public class OrdersControllerTest {
 

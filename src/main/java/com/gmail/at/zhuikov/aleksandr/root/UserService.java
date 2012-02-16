@@ -18,7 +18,7 @@ import org.springframework.security.openid.OpenIDAuthenticationToken;
 import org.springframework.stereotype.Component;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
-import com.gmail.at.zhuikov.aleksandr.root.respository.UserRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.UserRepository;
 
 @Component
 public class UserService implements AuthenticationUserDetailsService<OpenIDAuthenticationToken> {

@@ -18,7 +18,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("/root-context.xml")

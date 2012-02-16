@@ -18,7 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
-import com.gmail.at.zhuikov.aleksandr.root.respository.OrderRepository;
+import com.gmail.at.zhuikov.aleksandr.root.repository.OrderRepository;
 
 public class ItemsControllerTest {
 

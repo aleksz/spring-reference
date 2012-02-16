@@ -1,4 +1,4 @@
-package com.gmail.at.zhuikov.aleksandr.root.respository;
+package com.gmail.at.zhuikov.aleksandr.root.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
