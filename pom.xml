@@ -222,6 +222,11 @@
 			<artifactId>spring-data-jpa</artifactId>
 			<version>1.0.2.RELEASE</version>
 		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.2</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<testResources>
