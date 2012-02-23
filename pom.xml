@@ -419,8 +419,8 @@
 		</repository>
 	</repositories>
 	<scm>
-		<connection>scm:git:git@github.com:aleksz/spring-reference.git</connection>
-		<url>scm:git:git@github.com:aleksz/spring-reference.git</url>
-		<developerConnection>scm:git:git@github.com:aleksz/spring-reference.git</developerConnection>
+		<connection>scm:git:git@github.com:ignite/spring-reference.git</connection>
+		<url>scm:git:git@github.com:ignite/spring-reference.git</url>
+		<developerConnection>scm:git:git@github.com:ignite/spring-reference.git</developerConnection>
 	</scm>
 </project>
