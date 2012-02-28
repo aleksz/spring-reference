@@ -39,14 +39,10 @@ public class LocaleResolver extends AbstractLocaleResolver {
 	@Override
 	public Locale resolveLocale(HttpServletRequest request) {
 
-	    Principal userPrincipal = request.getUserPrincipal();
-
-	    if (userPrincipal != null) {
-	    	User user = (User) ((Authentication) userPrincipal).getPrincipal();
-		
-		    if (user.getLocale() != null && isSupported(user.getLocale())) {
-		    	return user.getLocale();
-		    }
+	    Locale principalLocale = getPrincipalLocale(request);
+	    
+	    if (principalLocale != null) {
+	    	return principalLocale;
 	    }
 	    
 		Enumeration<Locale> locales = request.getLocales();
@@ -59,6 +55,29 @@ public class LocaleResolver extends AbstractLocaleResolver {
 		}
 
 		return getDefaultLocale();
+	}
+
+	private Locale getPrincipalLocale(HttpServletRequest request) {
+		
+		Principal userPrincipal = request.getUserPrincipal();
+
+		if (userPrincipal == null) {
+			return null;
+		}
+		
+    	Authentication authentication = (Authentication) userPrincipal;
+
+    	if (!(authentication.getPrincipal() instanceof User)) {
+    		return null;
+    	}
+	    	
+		User user = (User) authentication.getPrincipal();
+		
+		if (user.getLocale() == null || !isSupported(user.getLocale())) {
+			return null;
+		}
+		
+    	return user.getLocale();
 	}
 
 	private boolean isSupported(Locale locale) {

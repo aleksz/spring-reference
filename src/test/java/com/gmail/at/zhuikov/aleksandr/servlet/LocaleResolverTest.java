@@ -1,5 +1,7 @@
 package com.gmail.at.zhuikov.aleksandr.servlet;
 
+import static com.gmail.at.zhuikov.aleksandr.root.domain.GrantedAuthority.ADMIN;
+import static java.util.Arrays.asList;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.when;
 import static org.mockito.MockitoAnnotations.initMocks;
@@ -11,6 +13,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 
@@ -43,6 +46,16 @@ public class LocaleResolverTest {
 	@Test
 	public void selectsRequestLocaleIfPrincipalDoesNotHaveLocale() {
 		User user = new User("username");
+		request.setUserPrincipal(principal);
+		when(principal.getPrincipal()).thenReturn(user);
+		request.addPreferredLocale(new Locale("ru"));
+		assertEquals("ru", resolver.resolveLocale(request).getLanguage());
+	}
+	
+	@Test
+	public void selectsRequestLocaleIfPrincipalIsNotAwareOfLocale() {
+		UserDetails user = new org.springframework.security.core.userdetails.User(
+				"username", "", asList(ADMIN));
 		request.setUserPrincipal(principal);
 		when(principal.getPrincipal()).thenReturn(user);
 		request.addPreferredLocale(new Locale("ru"));

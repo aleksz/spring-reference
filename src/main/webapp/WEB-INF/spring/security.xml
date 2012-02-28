@@ -15,8 +15,9 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/**" access="hasRole('USER')" />
+	    <http-basic />
 		<logout logout-url="/logout"/>
-		<openid-login login-page="/openIdLogin.jsp">
+ 		<openid-login login-page="/openIdLogin.jsp">
 		 	<attribute-exchange identifier-match="https://www.google.com/.*">
 	           <!--  <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
 	            <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
@@ -33,6 +34,12 @@
 		</openid-login>
 	</http>
 
-	<authentication-manager alias="authenticationManager"/>
+	<authentication-manager >
+		<authentication-provider>
+			<user-service>
+				<user name="restuser" password="ohW559f5" authorities="USER" />
+			</user-service>
+		</authentication-provider>
+	</authentication-manager>
 
 </beans:beans>
