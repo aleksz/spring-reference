@@ -12,6 +12,8 @@
 	</head>
 	<body>
 	
+		<%@ include file="userInfo.jspf" %>
+	
 		<c:forEach items="${page.content}" var="order">
 			<div>
 				<a href="orders/${order.id}">

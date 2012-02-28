@@ -15,7 +15,7 @@
 
 	<http use-expressions="true">
 		<intercept-url pattern="/**" access="hasRole('USER')" />
-		<logout/>
+		<logout logout-url="/logout"/>
 		<openid-login login-page="/openIdLogin.jsp">
 		 	<attribute-exchange identifier-match="https://www.google.com/.*">
 	           <!--  <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>

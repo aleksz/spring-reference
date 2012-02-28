@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
 	</head>
 	<body>
+		<%@ include file="userInfo.jspf" %>
 		<c:url value="/orders/${item.order.id}/items" var="formActionUrl"/>
 		<form:form commandName="item" method="POST" action="${formActionUrl}">
 			<form:errors path="order.*" element="div" cssClass="error"/>

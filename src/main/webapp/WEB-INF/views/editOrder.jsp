@@ -14,6 +14,9 @@
 	<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
 </head>
 <body>
+	
+	<%@ include file="userInfo.jspf" %>
+	
 	<c:url value="/orders/${order.id}" var="formActionUrl"/>
 	
 	<form:form commandName="order" method="POST" action="${formActionUrl}">

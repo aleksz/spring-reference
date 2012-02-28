@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
 	</head>
 	<body>
+		<%@ include file="userInfo.jspf" %>
 		<c:url value="/orders" var="formActionUrl"/>
 		<form:form commandName="order" method="POST" action="${formActionUrl}">
 			<div><fmt:message key="order.customerName"/>: <form:input path="customer"/></div>
