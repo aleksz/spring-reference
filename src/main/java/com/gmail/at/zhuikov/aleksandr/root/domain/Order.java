@@ -59,25 +59,16 @@ public class Order {
 		return customer;
 	}
 
-	/**
-	 * @return the items
-	 */
 	@Valid
 	@UniqueProductInOrder(groups = ComplexValidation.class)
 	public Collection<Item> getItems() {
 		return items;
 	}
 
-	/**
-	 * @param items the items to set
-	 */
 	public void setItems(Collection<Item> items) {
 		this.items = items;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public Long getId() {
 		return id;
 	}
