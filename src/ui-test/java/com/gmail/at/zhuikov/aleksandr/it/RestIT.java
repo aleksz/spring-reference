@@ -57,21 +57,7 @@ public class RestIT {
 		        new AuthScope(serverName, serverPort, ANY_REALM), 
 		        new UsernamePasswordCredentials("restuser", "ohW559f5"));
 
-		return new HttpComponentsClientHttpRequestFactory(client) {
-			
-			@Override
-			protected HttpContext createHttpContext(HttpMethod httpMethod,
-					URI uri) {
-				
-				AuthCache authCache = new BasicAuthCache();
-				BasicScheme basicAuth = new BasicScheme();
-				authCache.put(new HttpHost(uri.getHost(), uri.getPort(), uri.getScheme()), basicAuth);
-				BasicHttpContext context = new BasicHttpContext();
-				context.setAttribute(AUTH_CACHE, authCache);
-				
-				return context;
-			}
-		};
+		return new HttpComponentsClientHttpRequestFactory(client);
 	}
 	
 	@Test

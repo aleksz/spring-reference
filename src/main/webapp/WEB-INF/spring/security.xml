@@ -13,11 +13,11 @@
     <http pattern="/resources/css/*" security="none" />
     <http pattern="/resources/js/*" security="none" />
 
-	<http use-expressions="true">
+	<http use-expressions="true" entry-point-ref="entryPoint">
 		<intercept-url pattern="/**" access="hasRole('USER')" />
-	    <http-basic />
+	    <http-basic/>
 		<logout logout-url="/logout"/>
- 		<openid-login login-page="/openIdLogin.jsp">
+ 		<openid-login>
 		 	<attribute-exchange identifier-match="https://www.google.com/.*">
 	           <!--  <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
 	            <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
@@ -41,5 +41,23 @@
 			</user-service>
 		</authentication-provider>
 	</authentication-manager>
+
+  	<beans:bean id="entryPoint"
+		class="org.springframework.security.web.authentication.DelegatingAuthenticationEntryPoint">
+		<beans:constructor-arg>
+			<beans:map>
+				<beans:entry key="hasHeader('Accept','text/html')" value-ref="formLoginEntryPoint" />
+			</beans:map>
+		</beans:constructor-arg>
+		<beans:property name="defaultEntryPoint" ref="basicEntryPoint"/>
+	</beans:bean>
+
+	<beans:bean id="basicEntryPoint" class="org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint">
+		<beans:property name="realmName" value="spring-reference"/>
+	</beans:bean>
+	
+	<beans:bean id="formLoginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+		<beans:constructor-arg value="/openIdLogin.jsp"/>
+	</beans:bean>
 
 </beans:beans>
