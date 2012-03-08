@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.annotate.JsonBackReference;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.core.style.ToStringCreator;
 
@@ -42,6 +43,7 @@ public class Item {
 	}
 
 	@Valid
+	@JsonBackReference
 	public Order getOrder() {
 		return order;
 	}

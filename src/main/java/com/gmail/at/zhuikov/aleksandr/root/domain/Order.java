@@ -19,6 +19,7 @@ import javax.validation.constraints.Pattern;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
+import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -61,6 +62,7 @@ public class Order {
 
 	@Valid
 	@UniqueProductInOrder(groups = ComplexValidation.class)
+	@JsonManagedReference
 	public Collection<Item> getItems() {
 		return items;
 	}
