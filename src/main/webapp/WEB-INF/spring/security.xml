@@ -16,8 +16,8 @@
 	<http use-expressions="true" entry-point-ref="entryPoint">
 		<intercept-url pattern="/**" access="hasRole('USER')" />
 	    <http-basic/>
-		<logout logout-url="/logout"/>
- 		<openid-login>
+		<logout logout-url="/logout" />
+ 		<openid-login user-service-ref="openIdUserService">
 		 	<attribute-exchange identifier-match="https://www.google.com/.*">
 	           <!--  <openid-attribute name="email" type="http://axschema.org/contact/email" required="true" count="1"/>
 	            <openid-attribute name="firstname" type="http://axschema.org/namePerson/first" required="true" />
@@ -32,9 +32,10 @@
                 <openid-attribute name="country" type="http://schema.openid.net/contact/country/home" required="true" count="1"/>
             </attribute-exchange>
 		</openid-login>
+		<x509 subject-principal-regex="SERIALNUMBER=(.*?)," user-service-ref="certificateUserService" />
 	</http>
 
-	<authentication-manager >
+	<authentication-manager>
 		<authentication-provider>
 			<user-service>
 				<user name="restuser" password="ohW559f5" authorities="USER" />

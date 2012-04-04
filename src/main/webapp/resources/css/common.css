@@ -5,3 +5,37 @@
 #userInfo {
 	text-align: right;
 }
+
+#leftPanel {
+	width: 50%;
+	float: left;
+	display: inline;
+}
+#rightPanel {
+    width: 50%;
+    float: right;
+    display: inline;
+}
+.clear {
+	clear: both;
+}
+
+.loginPanel {
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+   	margin: 15px 5% 15px 5%;
+   	padding: 15px 5% 15px 5%;
+	border: 1px solid #cccccc;
+	width: 80%;
+}
+
+a.idCardLogin {
+	text-decoration: none;
+}
+a.idCardLogin label {
+	display: block;
+	font-size: larger;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+}

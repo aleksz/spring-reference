@@ -20,58 +20,60 @@ import org.springframework.stereotype.Component;
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 import com.gmail.at.zhuikov.aleksandr.root.repository.UserRepository;
 
-@Component
-public class UserService implements AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
+@Component("openIdUserService")
+public class OpenIdUserService implements
+		AuthenticationUserDetailsService<OpenIDAuthenticationToken> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(UserService.class);
-	
+	private static final Logger LOG = LoggerFactory
+			.getLogger(OpenIdUserService.class);
+
 	@Inject
 	private UserRepository userRepository;
-	
+
 	@Override
 	public UserDetails loadUserDetails(OpenIDAuthenticationToken token)
 			throws UsernameNotFoundException {
-		
+
 		String id = token.getIdentityUrl();
 
-        User user = userRepository.findOne(id);
-		
-        if (user == null) {
-        	user = new User(id);
-        	user.getAuthorities().add(USER);
-        }
+		User user = userRepository.findOne(id);
 
-        String country = null;
-        String language = null;
+		if (user == null) {
+			user = new User(id);
+			user.getAuthorities().add(USER);
+		}
 
-        List<OpenIDAttribute> attributes = token.getAttributes();
+		String country = null;
+		String language = null;
 
-        for (OpenIDAttribute attribute : attributes) {
-        	
-            if (attribute.getName().equals("country")) {
-            	country = attribute.getValues().get(0);
-            	LOG.info("OpenId provided country [" + country + "]");
-            }
+		List<OpenIDAttribute> attributes = token.getAttributes();
 
-            if (attribute.getName().equals("language")) {
-            	language = attribute.getValues().get(0);
-            	LOG.info("OpenId provided language [" + language + "]");
-            }
-        }
+		for (OpenIDAttribute attribute : attributes) {
 
-        Locale providedLocale = createLocale(language, country);
-        
-        if (providedLocale != null) {
-        	user.setLocale(providedLocale);
-        }
+			if (attribute.getName().equals("country")) {
+				country = attribute.getValues().get(0);
+				LOG.info("OpenId provided country [" + country + "]");
+			}
 
-        userRepository.save(user);
+			if (attribute.getName().equals("language")) {
+				language = attribute.getValues().get(0);
+				LOG.info("OpenId provided language [" + language + "]");
+			}
+		}
 
-        return user;
+		Locale providedLocale = createLocale(language, country);
+
+		if (providedLocale != null) {
+			user.setLocale(providedLocale);
+		}
+
+		userRepository.save(user);
+
+		return user;
 	}
 
 	private Locale createLocale(String language, String country) {
-		
+
 		if (hasText(country) && hasText(language)) {
 			return new Locale(language, country);
 		} else if (hasText(language)) {

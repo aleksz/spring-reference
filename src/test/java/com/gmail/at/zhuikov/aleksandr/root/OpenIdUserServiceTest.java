@@ -20,13 +20,14 @@ import org.mockito.Mock;
 import org.springframework.security.openid.OpenIDAttribute;
 import org.springframework.security.openid.OpenIDAuthenticationToken;
 
+import com.gmail.at.zhuikov.aleksandr.root.OpenIdUserService;
 import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 import com.gmail.at.zhuikov.aleksandr.root.repository.UserRepository;
 
-public class UserServiceTest {
+public class OpenIdUserServiceTest {
 
 	private @Mock UserRepository userRepository;
-	private @InjectMocks UserService service = new UserService();
+	private @InjectMocks OpenIdUserService service = new OpenIdUserService();
 	
 	@Before
 	public void injectMocks() {
