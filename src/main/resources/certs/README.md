@@ -1,7 +1,6 @@
 Tomcat setup for Estonian ID card
 =================================
 
-
 Here are some tips on how to quickly and lazily make ID card work with Tomcat, for development and testing purposes. The tips here are not mature enough for production systems, not even close.
 
 SSL connectivity
