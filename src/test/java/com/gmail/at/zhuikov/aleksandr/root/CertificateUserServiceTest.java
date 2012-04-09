@@ -25,7 +25,7 @@ public class CertificateUserServiceTest {
 	private @Mock
 	UserRepository userRepository;
 	private @Mock
-	OcspClient ocspClient;
+	OcspGateway ocspGateway;
 	private @InjectMocks
 	CertificateUserService service = new CertificateUserService();
 
@@ -54,7 +54,7 @@ public class CertificateUserServiceTest {
 				"personalIdCode", cert);
 
 		when(userRepository.findOne("identity")).thenReturn(null);
-		when(ocspClient.isValidVertificate(cert)).thenReturn(TRUE);
+		when(ocspGateway.isValidVertificate(cert)).thenReturn(TRUE);
 
 		User user = (User) service.loadUserDetails(token);
 
@@ -69,7 +69,7 @@ public class CertificateUserServiceTest {
 				"personalIdCode", cert);
 
 		when(userRepository.findOne("identity")).thenReturn(null);
-		when(ocspClient.isValidVertificate(cert)).thenReturn(FALSE);
+		when(ocspGateway.isValidVertificate(cert)).thenReturn(FALSE);
 
 		User user = (User) service.loadUserDetails(token);
 

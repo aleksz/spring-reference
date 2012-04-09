@@ -19,9 +19,9 @@ import ee.sk.digidoc.factory.NotaryFactory;
 import ee.sk.utils.ConfigManager;
 
 @Component
-public class OcspClient {
+public class OcspGateway {
 
-	private static final Logger LOG = LoggerFactory.getLogger(OcspClient.class);
+	private static final Logger LOG = LoggerFactory.getLogger(OcspGateway.class);
 
 	private static final String JDIGIDOC_PROPERTIES_FILENAME = "/jdigidoc.properties";
 

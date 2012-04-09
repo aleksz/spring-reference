@@ -26,7 +26,7 @@ public class CertificateUserService implements AuthenticationUserDetailsService<
 	private UserRepository userRepository;
 	
 	@Inject
-	private OcspClient ocspClient;
+	private OcspGateway ocspClient;
 	
 	@Override
 	public UserDetails loadUserDetails(PreAuthenticatedAuthenticationToken token)
