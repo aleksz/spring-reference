@@ -54,7 +54,7 @@ public class CertificateUserServiceTest {
 				"personalIdCode", cert);
 
 		when(userRepository.findOne("identity")).thenReturn(null);
-		when(ocspGateway.isValidVertificate(cert)).thenReturn(TRUE);
+		when(ocspGateway.isValidCertificate(cert)).thenReturn(TRUE);
 
 		User user = (User) service.loadUserDetails(token);
 
@@ -69,7 +69,7 @@ public class CertificateUserServiceTest {
 				"personalIdCode", cert);
 
 		when(userRepository.findOne("identity")).thenReturn(null);
-		when(ocspGateway.isValidVertificate(cert)).thenReturn(FALSE);
+		when(ocspGateway.isValidCertificate(cert)).thenReturn(FALSE);
 
 		User user = (User) service.loadUserDetails(token);
 

@@ -38,7 +38,7 @@ public class CertificateUserService implements AuthenticationUserDetailsService<
 		X509Certificate certificate = (X509Certificate) token.getCredentials();
 //		LOG.debug("User with certificate: " + certificate);
 		
-		boolean valid = ocspClient.isValidVertificate(certificate);
+		boolean valid = ocspClient.isValidCertificate(certificate);
 		LOG.info("Certificate is " + (valid ? "" : "NOT ") + "valid");
 
         User user = userRepository.findOne(personalIdCode);

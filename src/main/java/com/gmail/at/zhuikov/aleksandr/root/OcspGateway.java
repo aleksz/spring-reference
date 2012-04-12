@@ -63,7 +63,7 @@ public class OcspGateway {
 		}
 	}
 
-	public boolean isValidVertificate(X509Certificate cert) {
+	public boolean isValidCertificate(X509Certificate cert) {
 		try {
 			LOG.debug("Check cert: " + cert.getSubjectDN().getName());
 			LOG.debug("CA for cert: "
