@@ -6,7 +6,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 import java.net.URI;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -46,14 +45,14 @@ public class CreateOrderController {
 	}
 	
 	@RequestMapping(value = "/orders", method = POST, 
-			consumes = "application/json",
-			produces = "application/json")
+			consumes = { "application/json", "application/xml" },
+			produces = { "application/json", "application/xml" })
 	public String createFromBody(@Valid @RequestBody Order order) {
 		saveOrder(order);
 		return "redirect:/orders/" + order.getId();
 	}
 	
-	@RequestMapping(value = "/orders", method = POST, consumes = "application/json")
+	@RequestMapping(value = "/orders", method = POST, consumes = { "application/json", "application/xml" })
 	public ResponseEntity<Void> createFromBodyAndReturnLocation(
 			@Valid @RequestBody Order order, HttpServletRequest request) {
 
@@ -77,10 +76,7 @@ public class CreateOrderController {
 	@ExceptionHandler
 	@ResponseStatus(BAD_REQUEST)
 	public ModelAndView handleInvalidOrder(MethodArgumentNotValidException e) {
-		Map<String, Object> model = e.getBindingResult().getModel();
-		ModelAndView modelAndView = new ModelAndView("addOrder", model);
-		modelAndView.addObject("errors", e.getBindingResult().getAllErrors());
-		return modelAndView;
+		return new ModelAndView("addOrder", e.getBindingResult().getModel());
 	}
 	
 	@ExceptionHandler

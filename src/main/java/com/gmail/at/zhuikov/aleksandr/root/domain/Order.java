@@ -1,6 +1,8 @@
 package com.gmail.at.zhuikov.aleksandr.root.domain;
 
 
+import static javax.xml.bind.annotation.XmlAccessType.FIELD;
+
 import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -16,10 +18,12 @@ import javax.persistence.Table;
 import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
@@ -30,6 +34,9 @@ import org.springframework.core.style.ToStringCreator;
 @Entity
 @Table(name = "T_ORDER")
 @GroupSequence({ Order.class, ComplexValidation.class })
+@XmlRootElement
+@XmlType(name = "order-entity")
+@XmlAccessorType(FIELD)
 public class Order {
 
 	@Id
@@ -62,7 +69,6 @@ public class Order {
 
 	@Valid
 	@UniqueProductInOrder(groups = ComplexValidation.class)
-	@JsonManagedReference
 	public Collection<Item> getItems() {
 		return items;
 	}
