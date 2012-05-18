@@ -10,6 +10,8 @@
 		<title>
 			<fmt:message key="ordersPageTitle"/>
 		</title>
+		<c:url value="/resources/css/common.css" var="commonCssUrl"/>
+		<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
 	</head>
 	<body>
 	

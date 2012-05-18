@@ -1,0 +1,11 @@
+<%@ taglib prefix='c' uri='http://java.sun.com/jsp/jstl/core' %>
+<%@ taglib prefix='spring' uri='http://www.springframework.org/tags' %>
+
+<div class="loginPanel">
+    <a href='<c:url value="/"/>' class="idCardLogin">
+        <label for="idcard">
+            <spring:message code="login.hint.idcard"/>
+        </label>
+        <img src="${resources}/img/idkaart.gif" alt="icon" name="idcard"/>
+    </a>
+</div>
