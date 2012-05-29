@@ -115,6 +115,5 @@ public class CreateOrderControllerTest {
 		assertViewName(mav, "addOrder");
 		assertModelAttributeValue(mav, "order", order);
 		assertModelAttributeAvailable(mav, "org.springframework.validation.BindingResult.order");
-		assertModelAttributeAvailable(mav, "errors");
 	}
 }
