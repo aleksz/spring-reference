@@ -12,6 +12,8 @@
 		</title>
 		<c:url value="/resources/css/common.css" var="commonCssUrl"/>
 		<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
+		<c:url value="/gwt_test_module/gwt_test_module.nocache.js" var="gwtUrl"/>
+		<script type="text/javascript" src="${gwtUrl}"></script>
 	</head>
 	<body>
 		<%@ include file="userInfo.jspf" %>
@@ -24,5 +26,19 @@
 			<fmt:message key="saveButton" var="translatedSave"/>
 			<input type="submit" name="save" value="${translatedSave}"/>
 		</form:form>
+
+		<table align="center" border="1">
+			<tr>
+				<td colspan="2" style="font-weight: bold;">Please enter your
+					name:</td>
+			</tr>
+			<tr>
+				<td id="nameFieldContainer"></td>
+				<td id="sendButtonContainer"></td>
+			</tr>
+			<tr>
+				<td colspan="2" style="color: red;" id="errorLabelContainer"></td>
+			</tr>
+		</table>
 	</body>
 </html>

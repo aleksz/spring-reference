@@ -267,6 +267,36 @@
             <artifactId>jdigidoc</artifactId>
             <version>2.3.99</version>
         </dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-servlet</artifactId>
+			<version>2.4.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.google.gwt</groupId>
+			<artifactId>gwt-user</artifactId>
+			<version>2.4.0</version>
+			<scope>provided</scope>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.validation</groupId>
+					<artifactId>validation-api</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+	    <dependency>
+	        <groupId>javax.validation</groupId>
+	        <artifactId>validation-api</artifactId>
+	        <version>1.0.0.GA</version>
+	    </dependency>
+	    <dependency>
+	        <groupId>javax.validation</groupId>
+	        <artifactId>validation-api</artifactId>
+	        <version>1.0.0.GA</version>
+	        <classifier>sources</classifier>
+	        <scope>provided</scope>
+	    </dependency>
 	</dependencies>
 	<build>
 		<testResources>
@@ -419,6 +449,26 @@
 						<goals>
 							<goal>clean</goal>
 							<goal>check</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>gwt-maven-plugin</artifactId>
+				<version>2.4.0</version>
+				<configuration>
+					<runTarget>orders</runTarget>
+					<hostedWebapp>${webappDirectory}</hostedWebapp>
+					<noServer>true</noServer>
+				</configuration>
+				<executions>
+					<execution>
+						<configuration>
+							<module>com.gmail.at.zhuikov.aleksandr.GwtTestModule</module>
+						</configuration>
+						<goals>
+							<goal>compile</goal>
 						</goals>
 					</execution>
 				</executions>
