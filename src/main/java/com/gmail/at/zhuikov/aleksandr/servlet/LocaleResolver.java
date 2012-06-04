@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.i18n.AbstractLocaleResolver;
@@ -19,6 +21,8 @@ import com.gmail.at.zhuikov.aleksandr.root.domain.User;
 
 @Component("localeResolver")
 public class LocaleResolver extends AbstractLocaleResolver {
+
+	private static final Logger LOG = LoggerFactory.getLogger(LocaleResolver.class);
 
 	private Set<String> supportedLocales = new HashSet<String>();
 
@@ -33,6 +37,8 @@ public class LocaleResolver extends AbstractLocaleResolver {
 			}
 		}
 
+		LOG.info("Supported locales are " + supportedLocales);
+		
 		setDefaultLocale(ENGLISH);
 	}
 
