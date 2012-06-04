@@ -12,7 +12,7 @@
 		<org.springframework-version>3.1.1.RELEASE</org.springframework-version>
 		<org.springsecurity-version>3.1.0.RELEASE</org.springsecurity-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
-		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<org.slf4j-version>1.6.1</org.slf4j-version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	
@@ -227,6 +227,13 @@
 		</dependency>
 		
 		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+			<classifier>sources</classifier>
+		</dependency>
+		
+		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 			<version>20030203.000129</version>
@@ -297,6 +304,17 @@
 	        <classifier>sources</classifier>
 	        <scope>provided</scope>
 	    </dependency>
+	    <dependency>
+	    	<groupId>com.googlecode.gwt-validation</groupId>
+	    	<artifactId>gwt-validation</artifactId>
+	    	<version>2.1</version>
+	    	<scope>provided</scope>
+	    </dependency>
+		<dependency>
+			<groupId>com.flipthebird.gwt-hashcode-equals</groupId>
+			<artifactId>gwt-hashcode-equals</artifactId>
+			<version>0.1.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<testResources>
@@ -354,6 +372,7 @@
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopPort>8005</stopPort>
 					<stopKey>STOP</stopKey>
+					<webApp>${project.build.directory}/${project.artifactId}.war</webApp>
 				</configuration>
 				<executions>
 					<execution>

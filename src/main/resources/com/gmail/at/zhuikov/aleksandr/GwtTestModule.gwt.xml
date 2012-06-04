@@ -16,11 +16,23 @@
 
   <!-- Other module inherits                                      -->
 
+<!--   <inherits name='com.em.validation.Validation' /> -->
+  <inherits name='org.hibernate.validator.HibernateValidator' />
+  <inherits name="com.flipthebird.GwtHashCodeEquals"/>
+  <inherits name='com.google.gwt.editor.Editor'/>
+
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.gmail.at.zhuikov.aleksandr.client.GwtTestModule' />
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />
+  <source path='root/domain' />
+  <super-source path="validator" />
 <!--   <source path='shared' /> -->
 
+  <replace-with
+	  class="com.gmail.at.zhuikov.aleksandr.client.SampleValidatorFactory">
+    <when-type-is class="javax.validation.ValidatorFactory" />
+  </replace-with>
+   
 </module>

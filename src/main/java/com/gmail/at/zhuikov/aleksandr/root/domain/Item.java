@@ -77,14 +77,14 @@ public class Item {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return new ToStringCreator(this)
-				.append("product", product)
-				.append("quantity", quantity)
-				.append("price", price)
-				.toString();
-	}
+//	@Override
+//	public String toString() {
+//		return new ToStringCreator(this)
+//				.append("product", product)
+//				.append("quantity", quantity)
+//				.append("price", price)
+//				.toString();
+//	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -103,7 +103,7 @@ public class Item {
 
 		Item other = (Item) obj;
 
-		return new EqualsBuilder()
+		return new com.flipthebird.gwthashcodeequals.EqualsBuilder()
 				.append(product, other.product)
 				.append(order, other.order)
 				.append(price, other.price)
@@ -112,7 +112,7 @@ public class Item {
 	
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder()
+		return new com.flipthebird.gwthashcodeequals.HashCodeBuilder()
 				.append(product)
 				.append(order)
 				.append(price)

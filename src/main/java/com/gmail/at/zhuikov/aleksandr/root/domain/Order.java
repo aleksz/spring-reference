@@ -22,13 +22,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.core.style.ToStringCreator;
 
 
 @Entity
@@ -95,10 +92,12 @@ public class Order {
 		return date;
 	}
 	
-	@Override
-	public String toString() {
-		return new ToStringCreator(this).append(customer).toString();
-	}
+//	@Override
+//	public String toString() {
+//		return new com.google.inject.internal.ToStringBuilder(getClass()).add("customer", customer).toString();
+//		return new ToStringBuilder(this).append(customer).toString();
+//		return customer;
+//	}
 	
 	@Override
 	public boolean equals(Object obj) {
@@ -117,7 +116,7 @@ public class Order {
 
 		Order other = (Order) obj;
 
-		return new EqualsBuilder()
+		return new com.flipthebird.gwthashcodeequals.EqualsBuilder()
 				.append(customer, other.customer)
 				.append(date, other.date)
 				.isEquals();
@@ -125,7 +124,7 @@ public class Order {
 	
 	@Override
 	public int hashCode() {
-		return new HashCodeBuilder()
+		return new com.flipthebird.gwthashcodeequals.HashCodeBuilder()
 				.append(customer)
 				.append(date)
 				.toHashCode();

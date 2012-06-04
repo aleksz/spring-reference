@@ -20,25 +20,13 @@
 		<c:url value="/orders" var="formActionUrl"/>
 		<form:form commandName="order" method="POST" action="${formActionUrl}">
 			<div><fmt:message key="order.customerName"/>: <form:input path="customer"/></div>
+			<div id="customer.errors" class="error"></div>
 			<form:errors path="customer" element="div" cssClass="error"/>
 			<div><fmt:message key="order.email"/>: <form:input path="email"/></div>
+			<div id="email.errors" class="error"></div>
 			<form:errors path="email" element="div" cssClass="error"/>
 			<fmt:message key="saveButton" var="translatedSave"/>
-			<input type="submit" name="save" value="${translatedSave}"/>
+			<button type="submit" id="save" name="save">${translatedSave}</button>
 		</form:form>
-
-		<table align="center" border="1">
-			<tr>
-				<td colspan="2" style="font-weight: bold;">Please enter your
-					name:</td>
-			</tr>
-			<tr>
-				<td id="nameFieldContainer"></td>
-				<td id="sendButtonContainer"></td>
-			</tr>
-			<tr>
-				<td colspan="2" style="color: red;" id="errorLabelContainer"></td>
-			</tr>
-		</table>
 	</body>
 </html>
