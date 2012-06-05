@@ -29,7 +29,7 @@ public class LocaleResolver extends AbstractLocaleResolver {
 	{
 		for (Locale l : Locale.getAvailableLocales()) {
 
-			String name = "/translations";
+			String name = "/com/gmail/at/zhuikov/aleksandr/client/Translations";
 			name += "_" + l + ".properties";
 
 			if (getClass().getResourceAsStream(name) != null) {

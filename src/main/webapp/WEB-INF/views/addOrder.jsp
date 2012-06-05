@@ -7,6 +7,7 @@
 
 <html>
 	<head>
+		<meta name="gwt:property" content="locale=${pageContext.response.locale}">
 		<title>
 			<fmt:message key="addOrderPageTitle"/>
 		</title>

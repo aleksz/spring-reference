@@ -23,7 +23,7 @@
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
 	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
-      <property name="basename" value="classpath:/translations"/>
+      <property name="basename" value="classpath:com/gmail/at/zhuikov/aleksandr/client/Translations"/>
       <property name="defaultEncoding" value="UTF-8"/>
   	</bean>
   	

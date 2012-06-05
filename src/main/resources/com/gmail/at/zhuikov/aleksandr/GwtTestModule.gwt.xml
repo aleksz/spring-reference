@@ -20,6 +20,7 @@
   <inherits name='org.hibernate.validator.HibernateValidator' />
   <inherits name="com.flipthebird.GwtHashCodeEquals"/>
   <inherits name='com.google.gwt.editor.Editor'/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
 
   <!-- Specify the app entry point class.                         -->
   <entry-point class='com.gmail.at.zhuikov.aleksandr.client.GwtTestModule' />
@@ -34,5 +35,14 @@
 	  class="com.gmail.at.zhuikov.aleksandr.client.SampleValidatorFactory">
     <when-type-is class="javax.validation.ValidatorFactory" />
   </replace-with>
+  
+  <replace-with
+	  class="com.gmail.at.zhuikov.aleksandr.client.ValidationMessageResolver">
+    <when-type-is class="com.google.gwt.validation.client.UserValidationMessagesResolver" />
+  </replace-with>
+  
+  <extend-property name="locale" values="en"/>
+  <extend-property name="locale" values="ru"/>
+  <set-property-fallback name="locale" value="en"/>
    
 </module>
