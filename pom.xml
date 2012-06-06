@@ -480,7 +480,6 @@
 					<runTarget>http://localhost:8080/spring-reference/orders</runTarget>
 					<hostedWebapp>${basedir}/src/main/webapp</hostedWebapp>
 					<noServer>true</noServer>
-					<copyWebapp>true</copyWebapp>
 					<inplace>true</inplace>
 				</configuration>
 				<executions>
