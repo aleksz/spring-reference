@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module rename-to="gwt_test_module">
+<module rename-to="add_order_module">
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User' />
 
@@ -23,7 +23,7 @@
   <inherits name="com.google.gwt.i18n.I18N"/>
 
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='com.gmail.at.zhuikov.aleksandr.client.GwtTestModule' />
+  <entry-point class='com.gmail.at.zhuikov.aleksandr.client.AddOrderModule' />
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client' />

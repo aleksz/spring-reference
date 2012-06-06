@@ -21,7 +21,7 @@
 		up static resources in the ${webappRoot}/resources directory -->
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/favicon.ico" location="/resources/img/favicon.ico" />
-	<mvc:resources mapping="/gwt_test_module/**" location="/gwt_test_module/" />
+	<mvc:resources mapping="/add_order_module/**" location="/add_order_module/" />
 	
 	<context:component-scan base-package="com.gmail.at.zhuikov.aleksandr.servlet"/>
 

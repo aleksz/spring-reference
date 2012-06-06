@@ -477,18 +477,29 @@
 				<artifactId>gwt-maven-plugin</artifactId>
 				<version>2.4.0</version>
 				<configuration>
-					<runTarget>orders</runTarget>
-					<hostedWebapp>${webappDirectory}</hostedWebapp>
+					<runTarget>http://localhost:8080/spring-reference/orders</runTarget>
+					<hostedWebapp>${basedir}/src/main/webapp</hostedWebapp>
 					<noServer>true</noServer>
+					<copyWebapp>true</copyWebapp>
+					<inplace>true</inplace>
 				</configuration>
 				<executions>
 					<execution>
-						<configuration>
-							<module>com.gmail.at.zhuikov.aleksandr.GwtTestModule</module>
-						</configuration>
+						<id>default-clean</id>
+						<phase>clean</phase>
+						<goals>
+							<goal>clean</goal>
+						</goals>
+					</execution>
+ 					<execution>
+ 						<id>default-prepare-package</id>
+						<phase>prepare-package</phase>
 						<goals>
 							<goal>compile</goal>
 						</goals>
+						<configuration>
+							<inplace>false</inplace>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

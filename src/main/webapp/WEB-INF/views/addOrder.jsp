@@ -13,7 +13,7 @@
 		</title>
 		<c:url value="/resources/css/common.css" var="commonCssUrl"/>
 		<link rel="stylesheet" type="text/css" href="${commonCssUrl}" />
-		<c:url value="/gwt_test_module/gwt_test_module.nocache.js" var="gwtUrl"/>
+		<c:url value="/add_order_module/add_order_module.nocache.js" var="gwtUrl"/>
 		<script type="text/javascript" src="${gwtUrl}"></script>
 	</head>
 	<body>

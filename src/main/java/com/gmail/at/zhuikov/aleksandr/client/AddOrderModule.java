@@ -5,7 +5,7 @@ import javax.validation.ValidatorFactory;
 
 import com.google.gwt.core.client.EntryPoint;
 
-public class GwtTestModule implements EntryPoint {
+public class AddOrderModule implements EntryPoint {
 
 	public void onModuleLoad() {
 
