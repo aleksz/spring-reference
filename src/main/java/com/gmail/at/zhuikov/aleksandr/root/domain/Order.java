@@ -59,7 +59,7 @@ public class Order {
 	
 	@NotBlank
 	@Length(min = 5, max = 30)
-	@Pattern(regexp = "[a-zA-Z\\s]*", message = "Only characters allowed")
+	@Pattern(regexp = "[a-zA-Z\\s]*", message = "{onlyCharsAllowed}")
 	public String getCustomer() {
 		return customer;
 	}
