@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to="add_order_module">
+
+	<inherits name='com.gmail.at.zhuikov.aleksandr.AddOrderModule' />
+	<collapse-all-properties />
+
+</module>

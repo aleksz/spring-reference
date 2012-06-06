@@ -481,6 +481,9 @@
 					<hostedWebapp>${basedir}/src/main/webapp</hostedWebapp>
 					<noServer>true</noServer>
 					<inplace>true</inplace>
+					<style>PRETTY</style>
+					<draftCompile>true</draftCompile>
+					<module>com.gmail.at.zhuikov.aleksandr.AddOrderModuleDev</module>
 				</configuration>
 				<executions>
 					<execution>
@@ -497,7 +500,10 @@
 							<goal>compile</goal>
 						</goals>
 						<configuration>
+							<style>OBF</style>
 							<inplace>false</inplace>
+							<draftCompile>false</draftCompile>
+							<module>com.gmail.at.zhuikov.aleksandr.AddOrderModule</module>
 						</configuration>
 					</execution>
 				</executions>
