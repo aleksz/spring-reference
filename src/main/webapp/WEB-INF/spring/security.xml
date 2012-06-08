@@ -12,6 +12,7 @@
     <http pattern="/resources/img/*" security="none" />
     <http pattern="/resources/css/*" security="none" />
     <http pattern="/resources/js/*" security="none" />
+    <http pattern="/favicon.ico" security="none" />
 
 	<http use-expressions="true" entry-point-ref="entryPoint">
 		<intercept-url pattern="/**" access="hasRole('USER')" />
