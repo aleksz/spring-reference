@@ -29,6 +29,7 @@ public abstract class AbstractWebDriverTest {
 		capabillities.setCapability("name", getClass().getSimpleName() + "."
 				+ name.getMethodName());
 		capabillities.setCapability("capture-html", true);
+		capabillities.setCapability("build", System.getenv("BUILD_NUMBER"));
 
         try {
 			return new RemoteWebDriver(
