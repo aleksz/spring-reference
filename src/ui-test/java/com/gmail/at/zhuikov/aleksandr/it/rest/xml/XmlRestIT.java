@@ -22,6 +22,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,6 +45,7 @@ import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.domain.xml.XmlFriendlyErrors;
 import com.gmail.at.zhuikov.aleksandr.root.domain.xml.XmlFriendlyPage;
 
+@Ignore
 public class XmlRestIT {
 
 	private static final Logger LOG = LoggerFactory.getLogger(XmlRestIT.class);
