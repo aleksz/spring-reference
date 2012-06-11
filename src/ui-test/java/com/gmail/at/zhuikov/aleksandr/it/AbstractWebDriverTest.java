@@ -26,33 +26,33 @@ public abstract class AbstractWebDriverTest {
 	private final String relativeUrl;
 	@Rule public TestName name = new TestName();
 	
-	@Rule public TestWatcher watcher = new TestWatcher() {
-
-		@Override
-		protected void succeeded(Description description) {
-			if (driver instanceof SauceOnDemandSelenium) {
-				try {
-					((SauceOnDemandSelenium) driver).jobPassed();
-				} catch (IOException e1) {
-					throw new RuntimeException(e1);
-				}
-			}
-			driver.quit();
-		}
-
-		@Override
-		protected void failed(Throwable e, Description description) {
-			if (driver instanceof SauceOnDemandSelenium) {
-				try {
-					((SauceOnDemandSelenium) driver).jobFailed();
-				} catch (IOException e1) {
-					throw new RuntimeException(e1);
-				}
-			}
-			driver.quit();
-		}
-		
-	};
+//	@Rule public TestWatcher watcher = new TestWatcher() {
+//
+//		@Override
+//		protected void succeeded(Description description) {
+//			if (driver instanceof SauceOnDemandSelenium) {
+//				try {
+//					((SauceOnDemandSelenium) driver).jobPassed();
+//				} catch (IOException e1) {
+//					throw new RuntimeException(e1);
+//				}
+//			}
+//			driver.quit();
+//		}
+//
+//		@Override
+//		protected void failed(Throwable e, Description description) {
+//			if (driver instanceof SauceOnDemandSelenium) {
+//				try {
+//					((SauceOnDemandSelenium) driver).jobFailed();
+//				} catch (IOException e1) {
+//					throw new RuntimeException(e1);
+//				}
+//			}
+//			driver.quit();
+//		}
+//		
+//	};
 	
 	public AbstractWebDriverTest(String relativeUrl) {
 		this.relativeUrl = relativeUrl;
@@ -66,13 +66,13 @@ public abstract class AbstractWebDriverTest {
 		WebDriver driver = SeleniumFactory.createWebDriver(seleniumDriverUri,
 				System.getenv("SELENIUM_STARTING_URL"));
 
-		if (driver instanceof SauceOnDemandSelenium) {
-			try {
-				((SauceOnDemandSelenium) driver).setBuildNumber(System.getenv("BUILD_NUMBER"));
-			} catch (IOException e) {
-				throw new RuntimeException(e);
-			}
-		}
+//		if (driver instanceof SauceOnDemandSelenium) {
+//			try {
+//				((SauceOnDemandSelenium) driver).setBuildNumber(System.getenv("BUILD_NUMBER"));
+//			} catch (IOException e) {
+//				throw new RuntimeException(e);
+//			}
+//		}
 		return driver;
 //		DesiredCapabilities capabillities = DesiredCapabilities.firefox();
 //		capabillities.setCapability("version", "5");
