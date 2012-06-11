@@ -99,7 +99,7 @@ public abstract class AbstractWebDriverTest {
 	
 	@After
 	public void closePage() {
-//		driver.quit();
+		driver.quit();
 	}
 	
 	protected String getUniqueCharString() {
