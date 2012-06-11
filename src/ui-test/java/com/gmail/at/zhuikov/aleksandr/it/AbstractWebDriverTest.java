@@ -37,6 +37,7 @@ public abstract class AbstractWebDriverTest {
 					throw new RuntimeException(e1);
 				}
 			}
+			driver.quit();
 		}
 
 		@Override
@@ -48,6 +49,7 @@ public abstract class AbstractWebDriverTest {
 					throw new RuntimeException(e1);
 				}
 			}
+			driver.quit();
 		}
 		
 	};
@@ -91,7 +93,7 @@ public abstract class AbstractWebDriverTest {
 	
 	@After
 	public void closePage() {
-		driver.quit();
+//		driver.quit();
 	}
 	
 	protected String getUniqueCharString() {
