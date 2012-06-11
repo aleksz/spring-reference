@@ -61,7 +61,7 @@ public abstract class AbstractWebDriverTest {
 	protected WebDriver createDriver() {
 		
 		String seleniumDriverUri = System.getenv("SELENIUM_DRIVER");
-		seleniumDriverUri += "&" + getClass().getName() + "." + name.getMethodName();
+		seleniumDriverUri += "&job-name=" + getClass().getName() + "." + name.getMethodName();
 		
 		WebDriver driver = SeleniumFactory.createWebDriver(
 				System.getenv("SELENIUM_STARTING_URL"),
