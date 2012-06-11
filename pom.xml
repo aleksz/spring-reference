@@ -276,6 +276,12 @@
             <artifactId>jdigidoc</artifactId>
             <version>2.3.99</version>
         </dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-client-factory</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<testResources>
@@ -461,6 +467,10 @@
             <id>jdigidoc-devel</id>
             <name>jDigoDoc Maven development repository</name>
             <url>https://id.smartlink.ee/repo/mvnrepo</url>
+        </repository>
+        <repository>
+	        <id>maven.jenkins-ci.org</id>
+	        <url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
         </repository>
 	</repositories>
 	<scm>

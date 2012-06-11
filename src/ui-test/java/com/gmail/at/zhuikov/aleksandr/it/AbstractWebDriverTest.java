@@ -12,6 +12,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.saucelabs.selenium.client.factory.SeleniumFactory;
+import com.saucelabs.selenium.client.factory.spi.SeleniumFactorySPI;
+
 public abstract class AbstractWebDriverTest {
 
 	protected WebDriver driver;
@@ -23,21 +26,22 @@ public abstract class AbstractWebDriverTest {
 	}
 	
 	protected WebDriver createDriver() {
-		DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-		capabillities.setCapability("version", "5");
-		capabillities.setCapability("platform", Platform.XP);
-		capabillities.setCapability("name", getClass().getSimpleName() + "."
-				+ name.getMethodName());
-		capabillities.setCapability("capture-html", true);
-		capabillities.setCapability("build", System.getenv("BUILD_NUMBER"));
-
-        try {
-			return new RemoteWebDriver(
-			   new URL("http://cloudbees_reference:91d5e3b0-cbd6-4e23-acc9-ce14dc000565@ondemand.saucelabs.com:80/wd/hub"),
-			   capabillities);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
+		return SeleniumFactory.createWebDriver();
+//		DesiredCapabilities capabillities = DesiredCapabilities.firefox();
+//		capabillities.setCapability("version", "5");
+//		capabillities.setCapability("platform", Platform.XP);
+//		capabillities.setCapability("name", getClass().getSimpleName() + "."
+//				+ name.getMethodName());
+//		capabillities.setCapability("capture-html", true);
+//		capabillities.setCapability("build", System.getenv("BUILD_NUMBER"));
+//
+//        try {
+//			return new RemoteWebDriver(
+//			   new URL("http://cloudbees_reference:91d5e3b0-cbd6-4e23-acc9-ce14dc000565@ondemand.saucelabs.com:80/wd/hub"),
+//			   capabillities);
+//		} catch (MalformedURLException e) {
+//			throw new RuntimeException(e);
+//		}
 	}
 	
 	@Before
