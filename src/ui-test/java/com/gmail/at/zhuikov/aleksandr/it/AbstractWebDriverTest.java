@@ -1,8 +1,10 @@
 package com.gmail.at.zhuikov.aleksandr.it;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import org.bouncycastle.crypto.RuntimeCryptoException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -12,6 +14,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import com.saucelabs.sauce_ondemand.driver.SauceOnDemandSelenium;
 import com.saucelabs.selenium.client.factory.SeleniumFactory;
 import com.saucelabs.selenium.client.factory.spi.SeleniumFactorySPI;
 
@@ -26,7 +29,15 @@ public abstract class AbstractWebDriverTest {
 	}
 	
 	protected WebDriver createDriver() {
-		return SeleniumFactory.createWebDriver();
+		WebDriver driver = SeleniumFactory.createWebDriver();
+		if (driver instanceof SauceOnDemandSelenium) {
+			try {
+				((SauceOnDemandSelenium) driver).setBuildNumber(System.getenv("BUILD_NUMBER"));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		}
+		return driver;
 //		DesiredCapabilities capabillities = DesiredCapabilities.firefox();
 //		capabillities.setCapability("version", "5");
 //		capabillities.setCapability("platform", Platform.XP);
