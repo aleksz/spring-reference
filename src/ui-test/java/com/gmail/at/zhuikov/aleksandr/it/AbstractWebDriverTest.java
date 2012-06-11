@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.rules.TestName;
+import org.junit.rules.TestWatcher;
+import org.junit.runner.Description;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -23,6 +25,32 @@ public abstract class AbstractWebDriverTest {
 	protected WebDriver driver;
 	private final String relativeUrl;
 	@Rule public TestName name = new TestName();
+	
+	@Rule public TestWatcher watcher = new TestWatcher() {
+
+		@Override
+		protected void succeeded(Description description) {
+			if (driver instanceof SauceOnDemandSelenium) {
+				try {
+					((SauceOnDemandSelenium) driver).jobPassed();
+				} catch (IOException e1) {
+					throw new RuntimeException(e1);
+				}
+			}
+		}
+
+		@Override
+		protected void failed(Throwable e, Description description) {
+			if (driver instanceof SauceOnDemandSelenium) {
+				try {
+					((SauceOnDemandSelenium) driver).jobFailed();
+				} catch (IOException e1) {
+					throw new RuntimeException(e1);
+				}
+			}
+		}
+		
+	};
 	
 	public AbstractWebDriverTest(String relativeUrl) {
 		this.relativeUrl = relativeUrl;
