@@ -63,10 +63,9 @@ public abstract class AbstractWebDriverTest {
 		String seleniumDriverUri = System.getenv("SELENIUM_DRIVER");
 		seleniumDriverUri += "&job-name=" + getClass().getName() + "." + name.getMethodName();
 		
-		WebDriver driver = SeleniumFactory.createWebDriver(
-				System.getenv("SELENIUM_STARTING_URL"),
-				seleniumDriverUri);
-		
+		WebDriver driver = SeleniumFactory.createWebDriver(seleniumDriverUri,
+				System.getenv("SELENIUM_STARTING_URL"));
+
 		if (driver instanceof SauceOnDemandSelenium) {
 			try {
 				((SauceOnDemandSelenium) driver).setBuildNumber(System.getenv("BUILD_NUMBER"));
