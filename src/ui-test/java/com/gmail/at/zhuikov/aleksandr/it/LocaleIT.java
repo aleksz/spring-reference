@@ -3,16 +3,7 @@ package com.gmail.at.zhuikov.aleksandr.it;
 import static junit.framework.Assert.assertEquals;
 import static org.openqa.selenium.support.PageFactory.initElements;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-
 import org.junit.Test;
-import org.openqa.selenium.Platform;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
-import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 import com.gmail.at.zhuikov.aleksandr.it.page.LoginPage;
 import com.gmail.at.zhuikov.aleksandr.it.page.OrdersPage;
@@ -23,25 +14,25 @@ public class LocaleIT extends AbstractWebDriverTest {
 		super("orders");
 	}
 
-	@Override
-	protected WebDriver createDriver() {
-		FirefoxProfile profile = new FirefoxProfile();
-		profile.setPreference("intl.accept_languages", "ru");
-        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
-        capabillities.setCapability("version", "5");
-        capabillities.setCapability("platform", Platform.XP);
-        capabillities.setCapability("name", getClass().getSimpleName());
-        capabillities.setCapability("capture-html", true);
-        capabillities.setCapability("firefox_profile", profile);
-
-        try {
-			return new RemoteWebDriver(
-			   new URL("http://cloudbees_reference:91d5e3b0-cbd6-4e23-acc9-ce14dc000565@ondemand.saucelabs.com:80/wd/hub"),
-			   capabillities);
-		} catch (MalformedURLException e) {
-			throw new RuntimeException(e);
-		}
-	}
+//	@Override
+//	protected WebDriver createDriver() {
+//		FirefoxProfile profile = new FirefoxProfile();
+//		profile.setPreference("intl.accept_languages", "ru");
+//        DesiredCapabilities capabillities = DesiredCapabilities.firefox();
+//        capabillities.setCapability("version", "5");
+//        capabillities.setCapability("platform", Platform.XP);
+//        capabillities.setCapability("name", getClass().getSimpleName());
+//        capabillities.setCapability("capture-html", true);
+//        capabillities.setCapability("firefox_profile", profile);
+//
+//        try {
+//			return new RemoteWebDriver(
+//			   new URL("http://cloudbees_reference:91d5e3b0-cbd6-4e23-acc9-ce14dc000565@ondemand.saucelabs.com:80/wd/hub"),
+//			   capabillities);
+//		} catch (MalformedURLException e) {
+//			throw new RuntimeException(e);
+//		}
+//	}
 	
 	@Test
 	public void loginWithRussian() throws Exception {
