@@ -288,6 +288,12 @@
 			<version>2.2</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-embedded-rc-driver</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<testResources>
@@ -387,6 +393,10 @@
 				</executions>
 				<configuration>
 					<parallel>classes</parallel>
+					<systemPropertyVariables>
+						<DEFAULT_SELENIUM_DRIVER>embedded-rc:</DEFAULT_SELENIUM_DRIVER>
+            			<DEFAULT_SELENIUM_STARTING_URL>http://localhost:8080/spring-reference</DEFAULT_SELENIUM_STARTING_URL>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>

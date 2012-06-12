@@ -24,10 +24,6 @@ public class WebDriverIT extends AbstractWebDriverTest {
 	private EditOrderPage editOrderPage;
 	private AddItemPage addItemPage;
 
-	public WebDriverIT() {
-		super("");
-	}
-
 	@Before
 	public void initCustomerName() {
 		customerName = capitalize(getUniqueCharString());

@@ -10,10 +10,6 @@ import com.gmail.at.zhuikov.aleksandr.it.page.OrdersPage;
 
 public class LocaleIT extends AbstractWebDriverTest {
 
-	public LocaleIT() {
-		super("orders");
-	}
-
 //	@Override
 //	protected WebDriver createDriver() {
 //		FirefoxProfile profile = new FirefoxProfile();
