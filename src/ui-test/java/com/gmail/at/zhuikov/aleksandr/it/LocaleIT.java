@@ -34,6 +34,6 @@ public class LocaleIT extends AbstractWebDriverTest {
 		assertEquals("Login", loginPage.getLoginButtonText());
 		loginPage.loginWithMyOpenId("spring-reference-admin", "5ybQ58oN", "Estonian");
 		OrdersPage page = initElements(driver, OrdersPage.class);
-		assertEquals("Добавить новый заказ", page.getAddNewOrderLinkText());
+		assertEquals("Add new order", page.getAddNewOrderLinkText());
 	}
 }
