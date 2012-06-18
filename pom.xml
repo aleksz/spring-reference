@@ -479,7 +479,7 @@
 			<id>local</id>
 			<activation>
 				<property>
-					<name>!JENKINS_URL</name>
+					<name>!env.JENKINS_URL</name>
 				</property>
 			</activation>
 			<build>
