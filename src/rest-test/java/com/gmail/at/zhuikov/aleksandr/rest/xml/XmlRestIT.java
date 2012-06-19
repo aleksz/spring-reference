@@ -53,7 +53,7 @@ public class XmlRestIT extends AbstractRestTest {
 	
 	@Before
 	public void createRestTemplate() {
-		restTemplate = new RestTemplate(createHttpClientFactory("localhost", 8080));
+		restTemplate = new RestTemplate(createHttpClientFactory(server.getHost(), server.getPort()));
 		List<HttpMessageConverter<?>> converters = new ArrayList<HttpMessageConverter<?>>();
 		converters.add(new StringHttpMessageConverter());
 		converters.add(new MarshallingHttpMessageConverter(new Jaxb2Marshaller() {{
@@ -76,7 +76,7 @@ public class XmlRestIT extends AbstractRestTest {
 	@Test
 	public void listOrders() throws ParserConfigurationException, SAXException, IOException {
 		String result = restTemplate.getForObject(
-				serverUrl + "orders",
+				serverUrl + "/orders",
 				String.class);
 		
 		LOG.info(result);
@@ -90,8 +90,8 @@ public class XmlRestIT extends AbstractRestTest {
 	public void listOrdersReturnsPage() throws JsonParseException, IOException {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		restTemplate.postForLocation(serverUrl + "orders", order);
-		Page<Order> result = restTemplate.getForObject(serverUrl + "orders", XmlFriendlyPage.class);
+		restTemplate.postForLocation(serverUrl + "/orders", order);
+		Page<Order> result = restTemplate.getForObject(serverUrl + "/orders", XmlFriendlyPage.class);
 		LOG.info(result.toString());
 		assertEquals(0, result.getNumber());
 		assertEquals(20, result.getSize());
@@ -107,7 +107,7 @@ public class XmlRestIT extends AbstractRestTest {
 	public void createOrder() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		Order response = restTemplate.postForObject(serverUrl + "orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
 		assertNotNull(response);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
@@ -118,7 +118,7 @@ public class XmlRestIT extends AbstractRestTest {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
 		new Item(order, "x", 1).setQuantity(1);
-		Order response = restTemplate.postForObject(serverUrl + "orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
 	}
@@ -127,7 +127,7 @@ public class XmlRestIT extends AbstractRestTest {
 	public void createOrderAndGetLocation() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		LOG.info(restTemplate.postForLocation(serverUrl + "orders", order).toString());
+		LOG.info(restTemplate.postForLocation(serverUrl + "/orders", order).toString());
 	}
 	
 	@Test
@@ -135,7 +135,7 @@ public class XmlRestIT extends AbstractRestTest {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(serverUrl + "orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
 		} catch (HttpStatusCodeException e) {
 			LOG.info(e.getResponseBodyAsString());
 			assertEquals(BAD_REQUEST, e.getStatusCode());
@@ -151,7 +151,7 @@ public class XmlRestIT extends AbstractRestTest {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(serverUrl + "orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
 		} catch (MyHttpStatusCodeException e) {
 			assertEquals(request, e.getErrorBody().getTarget());
 			assertFalse(e.getErrorBody().getErrors().isEmpty());
@@ -175,7 +175,7 @@ public class XmlRestIT extends AbstractRestTest {
 		Order response = restTemplate.postForObject(serverUrl
 				+ "/orders", order, Order.class);
 
-		Order result = restTemplate.getForObject(serverUrl + "orders/"
+		Order result = restTemplate.getForObject(serverUrl + "/orders/"
 				+ response.getId(), Order.class);
 
 		assertEquals("super customer", result.getCustomer());
