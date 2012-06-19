@@ -76,7 +76,7 @@ public class JsonRestIT extends AbstractRestTest {
 	
 	@Test
 	public void listOrders() throws JsonParseException, IOException {
-		String result = restTemplate.getForObject(serverUrl + "/orders", String.class);
+		String result = restTemplate.getForObject(serverUrl + "orders", String.class);
 		LOG.info(result.toString());
 		new ObjectMapper().readValue(result, JsonNode.class);
 	}
@@ -85,8 +85,8 @@ public class JsonRestIT extends AbstractRestTest {
 	public void listOrdersReturnsPage() throws JsonParseException, IOException {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		restTemplate.postForLocation(serverUrl + "/orders", order);
-		Page<Order> result = restTemplate.getForObject(serverUrl + "/orders", XmlFriendlyPage.class);
+		restTemplate.postForLocation(serverUrl + "orders", order);
+		Page<Order> result = restTemplate.getForObject(serverUrl + "orders", XmlFriendlyPage.class);
 		LOG.info(result.toString());
 		assertEquals(0, result.getNumber());
 		assertEquals(20, result.getSize());
@@ -102,14 +102,14 @@ public class JsonRestIT extends AbstractRestTest {
 	public void createOrderAndPrintJson() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		System.out.println(restTemplate.postForObject(serverUrl + "/orders", order, String.class));
+		System.out.println(restTemplate.postForObject(serverUrl + "orders", order, String.class));
 	}
 	
 	@Test
 	public void createOrder() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "orders", order, Order.class);
 		assertNotNull(response);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
@@ -120,7 +120,7 @@ public class JsonRestIT extends AbstractRestTest {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
 		new Item(order, "x", 1).setQuantity(1);
-		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "orders", order, Order.class);
 		assertNotNull(response);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
@@ -130,7 +130,7 @@ public class JsonRestIT extends AbstractRestTest {
 	public void createOrderAndGetLocation() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		LOG.info(restTemplate.postForLocation(serverUrl + "/orders", order).toString());
+		LOG.info(restTemplate.postForLocation(serverUrl + "orders", order).toString());
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class JsonRestIT extends AbstractRestTest {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "orders", request, Order.class);
 		} catch (HttpClientErrorException e) {
 			LOG.info(e.getResponseBodyAsString());
 			assertEquals(BAD_REQUEST, e.getStatusCode());
@@ -157,7 +157,7 @@ public class JsonRestIT extends AbstractRestTest {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "orders", request, Order.class);
 		} catch (MyHttpStatusCodeException e) {
 			assertEquals(request, e.getErrorBody().getTarget());
 			assertFalse(e.getErrorBody().getErrors().isEmpty());
@@ -181,7 +181,7 @@ public class JsonRestIT extends AbstractRestTest {
 		Order response = restTemplate.postForObject(serverUrl
 				+ "/orders", order, Order.class);
 
-		Order result = restTemplate.getForObject(serverUrl + "/orders/"
+		Order result = restTemplate.getForObject(serverUrl + "orders/"
 				+ response.getId(), Order.class);
 
 //		assertTrue(hasText(result.getRemoteAddr()));
