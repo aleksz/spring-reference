@@ -35,6 +35,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
+import com.gmail.at.zhuikov.aleksandr.rest.AbstractRestTest;
 import com.gmail.at.zhuikov.aleksandr.rest.xml.MyResponseErrorHandler;
 import com.gmail.at.zhuikov.aleksandr.rest.xml.MyResponseErrorHandler.MyHttpStatusCodeException;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
@@ -42,10 +43,9 @@ import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.domain.xml.XmlFriendlyPage;
 import com.gmail.at.zhuikov.aleksandr.servlet.MappingJackson2HttpMessageConverter;
 
-public class JsonRestIT {
+public class JsonRestIT extends AbstractRestTest {
 
 	private static final Logger LOG = LoggerFactory.getLogger(JsonRestIT.class);
-	private static final String SERVER = "http://localhost:8080/spring-reference";
 	
 	private RestTemplate restTemplate;
 	
@@ -64,11 +64,11 @@ public class JsonRestIT {
 	}
 	
 	private HttpComponentsClientHttpRequestFactory createHttpClientFactory(
-			String serverName, int serverPort) {
+			String serverUrlName, int serverUrlPort) {
 
 		DefaultHttpClient client = new DefaultHttpClient();
 		client.getCredentialsProvider().setCredentials(
-		        new AuthScope(serverName, serverPort, ANY_REALM), 
+		        new AuthScope(serverUrlName, serverUrlPort, ANY_REALM), 
 		        new UsernamePasswordCredentials("restuser", "ohW559f5"));
 
 		return new HttpComponentsClientHttpRequestFactory(client);
@@ -76,7 +76,7 @@ public class JsonRestIT {
 	
 	@Test
 	public void listOrders() throws JsonParseException, IOException {
-		String result = restTemplate.getForObject(SERVER + "/orders", String.class);
+		String result = restTemplate.getForObject(serverUrl + "/orders", String.class);
 		LOG.info(result.toString());
 		new ObjectMapper().readValue(result, JsonNode.class);
 	}
@@ -85,8 +85,8 @@ public class JsonRestIT {
 	public void listOrdersReturnsPage() throws JsonParseException, IOException {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		restTemplate.postForLocation(SERVER + "/orders", order);
-		Page<Order> result = restTemplate.getForObject(SERVER + "/orders", XmlFriendlyPage.class);
+		restTemplate.postForLocation(serverUrl + "/orders", order);
+		Page<Order> result = restTemplate.getForObject(serverUrl + "/orders", XmlFriendlyPage.class);
 		LOG.info(result.toString());
 		assertEquals(0, result.getNumber());
 		assertEquals(20, result.getSize());
@@ -102,14 +102,14 @@ public class JsonRestIT {
 	public void createOrderAndPrintJson() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		System.out.println(restTemplate.postForObject(SERVER + "/orders", order, String.class));
+		System.out.println(restTemplate.postForObject(serverUrl + "/orders", order, String.class));
 	}
 	
 	@Test
 	public void createOrder() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		Order response = restTemplate.postForObject(SERVER + "/orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
 		assertNotNull(response);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
@@ -120,7 +120,7 @@ public class JsonRestIT {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
 		new Item(order, "x", 1).setQuantity(1);
-		Order response = restTemplate.postForObject(SERVER + "/orders", order, Order.class);
+		Order response = restTemplate.postForObject(serverUrl + "/orders", order, Order.class);
 		assertNotNull(response);
 		assertEquals(order, response);
 		assertNotNull(response.getId());
@@ -130,7 +130,7 @@ public class JsonRestIT {
 	public void createOrderAndGetLocation() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		LOG.info(restTemplate.postForLocation(SERVER + "/orders", order).toString());
+		LOG.info(restTemplate.postForLocation(serverUrl + "/orders", order).toString());
 	}
 	
 	@Test
@@ -138,7 +138,7 @@ public class JsonRestIT {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(SERVER + "/orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
 		} catch (HttpClientErrorException e) {
 			LOG.info(e.getResponseBodyAsString());
 			assertEquals(BAD_REQUEST, e.getStatusCode());
@@ -157,7 +157,7 @@ public class JsonRestIT {
 		Order request = new Order("2444");
 		request.setEmail("customer@example.com");
 		try {
-			restTemplate.postForObject(SERVER + "/orders", request, Order.class);
+			restTemplate.postForObject(serverUrl + "/orders", request, Order.class);
 		} catch (MyHttpStatusCodeException e) {
 			assertEquals(request, e.getErrorBody().getTarget());
 			assertFalse(e.getErrorBody().getErrors().isEmpty());
@@ -178,10 +178,10 @@ public class JsonRestIT {
 	public void getOrder() {
 		Order order = new Order("super customer");
 		order.setEmail("customer@example.com");
-		Order response = restTemplate.postForObject(SERVER
+		Order response = restTemplate.postForObject(serverUrl
 				+ "/orders", order, Order.class);
 
-		Order result = restTemplate.getForObject(SERVER + "/orders/"
+		Order result = restTemplate.getForObject(serverUrl + "/orders/"
 				+ response.getId(), Order.class);
 
 //		assertTrue(hasText(result.getRemoteAddr()));
