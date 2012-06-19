@@ -1,6 +1,5 @@
-package com.gmail.at.zhuikov.aleksandr.it.rest.json;
+package com.gmail.at.zhuikov.aleksandr.rest.json;
 
-import static javax.xml.bind.annotation.XmlAccessType.FIELD;
 import static junit.framework.Assert.assertEquals;
 import static org.apache.http.auth.AuthScope.ANY_REALM;
 import static org.junit.Assert.assertFalse;
@@ -9,14 +8,10 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 import static org.springframework.data.domain.Sort.Direction.DESC;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.util.StringUtils.hasText;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
@@ -33,8 +28,6 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -42,8 +35,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectMapper.DefaultTyping;
 import com.fasterxml.jackson.module.jaxb.JaxbAnnotationIntrospector;
-import com.gmail.at.zhuikov.aleksandr.it.rest.xml.MyResponseErrorHandler;
-import com.gmail.at.zhuikov.aleksandr.it.rest.xml.MyResponseErrorHandler.MyHttpStatusCodeException;
+import com.gmail.at.zhuikov.aleksandr.rest.xml.MyResponseErrorHandler;
+import com.gmail.at.zhuikov.aleksandr.rest.xml.MyResponseErrorHandler.MyHttpStatusCodeException;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.domain.xml.XmlFriendlyPage;

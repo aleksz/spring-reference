@@ -1,4 +1,4 @@
-package com.gmail.at.zhuikov.aleksandr.it.rest.xml;
+package com.gmail.at.zhuikov.aleksandr.rest.xml;
 
 import static junit.framework.Assert.assertEquals;
 import static org.apache.http.auth.AuthScope.ANY_REALM;
@@ -22,6 +22,7 @@ import org.apache.http.auth.AuthScope;
 import org.apache.http.auth.UsernamePasswordCredentials;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,7 +39,7 @@ import org.xml.sax.SAXException;
 
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
-import com.gmail.at.zhuikov.aleksandr.it.rest.xml.MyResponseErrorHandler.MyHttpStatusCodeException;
+import com.gmail.at.zhuikov.aleksandr.rest.xml.MyResponseErrorHandler.MyHttpStatusCodeException;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Item;
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
 import com.gmail.at.zhuikov.aleksandr.root.domain.xml.XmlFriendlyErrors;

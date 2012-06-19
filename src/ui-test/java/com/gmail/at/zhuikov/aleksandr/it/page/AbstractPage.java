@@ -1,7 +1,6 @@
 package com.gmail.at.zhuikov.aleksandr.it.page;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 public abstract class AbstractPage {
@@ -13,12 +12,6 @@ public abstract class AbstractPage {
 	}
 	
 	protected boolean hasElement(By selector) {
-		try {
-			driver.findElement(selector);
-		} catch (NoSuchElementException e) {
-			return false;
-		}
-		
-		return true;
+		return driver.findElements(selector).size() != 0;
 	}
 }

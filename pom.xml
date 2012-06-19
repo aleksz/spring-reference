@@ -186,7 +186,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
 		
@@ -276,6 +276,24 @@
             <artifactId>jdigidoc</artifactId>
             <version>2.3.99</version>
         </dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-client-factory</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>sauce-ondemand-driver</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.saucelabs.selenium</groupId>
+			<artifactId>selenium-embedded-rc-driver</artifactId>
+			<version>2.2</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<testResources>
@@ -334,26 +352,6 @@
 					<stopPort>8005</stopPort>
 					<stopKey>STOP</stopKey>
 				</configuration>
-				<executions>
-					<execution>
-						<id>start-jetty</id>
-						<phase>pre-integration-test</phase>
-						<goals>
-							<goal>run-exploded</goal>
-						</goals>
-						<configuration>
-							<scanIntervalSeconds>0</scanIntervalSeconds>
-							<daemon>true</daemon>
-						</configuration>
-					</execution>
-					<execution>
-						<id>stop-jetty</id>
-						<phase>post-integration-test</phase>
-						<goals>
-							<goal>stop</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -375,6 +373,10 @@
 				</executions>
 				<configuration>
 					<parallel>classes</parallel>
+					<systemPropertyVariables>
+						<DEFAULT_SELENIUM_DRIVER>embedded-rc:</DEFAULT_SELENIUM_DRIVER>
+            			<DEFAULT_SELENIUM_STARTING_URL>http://localhost:8080/spring-reference</DEFAULT_SELENIUM_STARTING_URL>
+					</systemPropertyVariables>
 				</configuration>
 			</plugin>
 			<plugin>
@@ -391,6 +393,7 @@
 						<configuration>
 							<sources>
 								<source>src/ui-test/java</source>
+								<source>src/rest-test/java</source>
 							</sources>
 						</configuration>
 					</execution>
@@ -467,10 +470,52 @@
             <name>jDigoDoc Maven development repository</name>
             <url>https://id.smartlink.ee/repo/mvnrepo</url>
         </repository>
+        <repository>
+	        <id>maven.jenkins-ci.org</id>
+	        <url>http://maven.jenkins-ci.org:8081/content/repositories/releases/</url>
+        </repository>
 	</repositories>
 	<scm>
 		<connection>scm:git:git@github.com:ignite/spring-reference.git</connection>
 		<url>scm:git:git@github.com:ignite/spring-reference.git</url>
 		<developerConnection>scm:git:git@github.com:ignite/spring-reference.git</developerConnection>
 	</scm>
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<property>
+					<name>!env.JENKINS_URL</name>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.mortbay.jetty</groupId>
+						<artifactId>maven-jetty-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>start-jetty</id>
+								<phase>pre-integration-test</phase>
+								<goals>
+									<goal>run-exploded</goal>
+								</goals>
+								<configuration>
+									<scanIntervalSeconds>0</scanIntervalSeconds>
+									<daemon>true</daemon>
+								</configuration>
+							</execution>
+							<execution>
+								<id>stop-jetty</id>
+								<phase>post-integration-test</phase>
+								<goals>
+									<goal>stop</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

@@ -1,32 +1,42 @@
 package com.gmail.at.zhuikov.aleksandr.it;
 
+import static org.springframework.util.StringUtils.hasText;
+
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
+import org.junit.rules.TestName;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+
+import com.saucelabs.selenium.client.factory.SeleniumFactory;
 
 public abstract class AbstractWebDriverTest {
 
 	protected WebDriver driver;
-	private final String relativeUrl;
-	
-	public AbstractWebDriverTest(String relativeUrl) {
-		this.relativeUrl = relativeUrl;
-		driver = createDriver();
-	}
+	@Rule public TestName name = new TestName();
 	
 	protected WebDriver createDriver() {
-		return new FirefoxDriver();
+		
+		String seleniumDriverUri = System.getenv("SELENIUM_DRIVER");
+
+		if (hasText(seleniumDriverUri)) {
+			seleniumDriverUri += "&job-name=" + getClass().getName() + "." + name.getMethodName();
+			seleniumDriverUri += "&username=" + System.getenv("SAUCE_ONDEMAND_USERNAME");
+			seleniumDriverUri += "&access-key=" + System.getenv("SAUCE_ONDEMAND_ACCESS_KEY");
+			System.setProperty("SELENIUM_DRIVER", seleniumDriverUri);
+		}
+		
+		return SeleniumFactory.createWebDriver();
 	}
 	
 	@Before
 	public void openPage() {
-		driver.get("http://localhost:8080/spring-reference/" + relativeUrl);
+		driver = createDriver();
 	}
 	
 	@After
 	public void closePage() {
-		driver.close();
+		driver.quit();
 	}
 	
 	protected String getUniqueCharString() {
