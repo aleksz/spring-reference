@@ -1,4 +1,4 @@
-package com.gmail.at.zhuikov.aleksandr.it.rest.xml;
+package com.gmail.at.zhuikov.aleksandr.rest.xml;
 
 import java.io.IOException;
 import java.util.List;
