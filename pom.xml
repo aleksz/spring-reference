@@ -425,6 +425,10 @@
 							</regex>
 						</regexes> -->
 					</check>
+					<formats>
+						<format>xml</format>
+						<format>html</format>
+					</formats>
 				</configuration>
 				<executions>
 					<execution>
