@@ -3,6 +3,7 @@ package com.gmail.at.zhuikov.aleksandr.root;
 import static com.gmail.at.zhuikov.aleksandr.root.domain.GrantedAuthority.USER;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -35,11 +36,25 @@ public class CertificateUserServiceTest {
 	}
 
 	@Test
+	public void updatesExistingUser() {
+		PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
+				"personalIdCode", mock(X509Certificate.class));
+
+		User user = new User("x");
+		when(userRepository.findOne("personalIdCode")).thenReturn(user);
+		
+		User result = (User) service.loadUserDetails(token);
+
+		assertEquals(user, result);
+		verify(userRepository).save(user);
+	}
+	
+	@Test
 	public void setsDefaultRoleToUser() {
 		PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
 				"personalIdCode", mock(X509Certificate.class));
 
-		when(userRepository.findOne("identity")).thenReturn(null);
+		when(userRepository.findOne("personalIdCode")).thenReturn(null);
 
 		User user = (User) service.loadUserDetails(token);
 
@@ -53,7 +68,7 @@ public class CertificateUserServiceTest {
 		PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
 				"personalIdCode", cert);
 
-		when(userRepository.findOne("identity")).thenReturn(null);
+		when(userRepository.findOne("personalIdCode")).thenReturn(null);
 		when(ocspGateway.isValidCertificate(cert)).thenReturn(TRUE);
 
 		User user = (User) service.loadUserDetails(token);
@@ -68,7 +83,7 @@ public class CertificateUserServiceTest {
 		PreAuthenticatedAuthenticationToken token = new PreAuthenticatedAuthenticationToken(
 				"personalIdCode", cert);
 
-		when(userRepository.findOne("identity")).thenReturn(null);
+		when(userRepository.findOne("personalIdCode")).thenReturn(null);
 		when(ocspGateway.isValidCertificate(cert)).thenReturn(FALSE);
 
 		User user = (User) service.loadUserDetails(token);
