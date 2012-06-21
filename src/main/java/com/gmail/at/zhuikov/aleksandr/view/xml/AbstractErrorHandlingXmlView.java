@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.ServletException;
 
-import org.springframework.oxm.Marshaller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.servlet.view.xml.MarshallingView;
 
@@ -16,8 +15,8 @@ public abstract class AbstractErrorHandlingXmlView<T> extends MarshallingView {
 
 	protected final String commandObjectName;
 
-	public AbstractErrorHandlingXmlView(Marshaller marshaller, String commandObjectName) {
-		super(marshaller);
+	public AbstractErrorHandlingXmlView(String commandObjectName) {
+		super();
 		this.commandObjectName = commandObjectName;
 	}
 	
