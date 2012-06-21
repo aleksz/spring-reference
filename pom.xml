@@ -403,29 +403,6 @@
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>cobertura-maven-plugin</artifactId>
 				<version>2.5.1</version>
-				<configuration>
-					<check>
-						<haltOnFailure>false</haltOnFailure>
-						<branchRate>85</branchRate>
-						<lineRate>85</lineRate>
-						<totalBranchRate>85</totalBranchRate>
-						<totalLineRate>85</totalLineRate>
-						<packageLineRate>85</packageLineRate>
-						<packageBranchRate>85</packageBranchRate>
-<!-- 						<regexes>
-							<regex>
-								<pattern>com.example.reallyimportant.*</pattern>
-								<branchRate>90</branchRate>
-								<lineRate>80</lineRate>
-							</regex>
-							<regex>
-								<pattern>com.example.boringcode.*</pattern>
-								<branchRate>40</branchRate>
-								<lineRate>30</lineRate>
-							</regex>
-						</regexes> -->
-					</check>
-				</configuration>
 				<executions>
 					<execution>
 						<goals>
@@ -441,29 +418,27 @@
                         </goals>
                     </execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-release-plugin</artifactId>
-				<version>2.3.1</version>
-			</plugin>
-		</plugins>
-	</build>
-	<reporting>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.1</version>
 				<configuration>
 					<formats>
 						<format>html</format>
 						<format>xml</format>
 					</formats>
+					<check>
+						<haltOnFailure>false</haltOnFailure>
+						<branchRate>85</branchRate>
+						<lineRate>85</lineRate>
+						<totalBranchRate>85</totalBranchRate>
+						<totalLineRate>85</totalLineRate>
+						<packageLineRate>85</packageLineRate>
+						<packageBranchRate>85</packageBranchRate>
+						<!-- <regexes> <regex> <pattern>com.example.reallyimportant.*</pattern> 
+							<branchRate>90</branchRate> <lineRate>80</lineRate> </regex> <regex> <pattern>com.example.boringcode.*</pattern> 
+							<branchRate>40</branchRate> <lineRate>30</lineRate> </regex> </regexes> -->
+					</check>
 				</configuration>
 			</plugin>
 		</plugins>
-	</reporting>
+	</build>
 	<repositories>
 		<repository>
 			<id>org.jboss.repository.releases</id>
