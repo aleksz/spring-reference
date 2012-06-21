@@ -425,10 +425,6 @@
 							</regex>
 						</regexes> -->
 					</check>
-					<formats>
-						<format>xml</format>
-						<format>html</format>
-					</formats>
 				</configuration>
 				<executions>
 					<execution>
@@ -437,6 +433,13 @@
 							<goal>check</goal>
 						</goals>
 					</execution>
+                    <execution>
+						<id>generate-cobertura-report</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
 				</executions>
 			</plugin>
 			<plugin>
@@ -455,6 +458,7 @@
 				<configuration>
 					<formats>
 						<format>html</format>
+						<format>xml</format>
 					</formats>
 				</configuration>
 			</plugin>
