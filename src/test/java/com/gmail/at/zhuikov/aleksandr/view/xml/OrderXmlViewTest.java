@@ -18,6 +18,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.oxm.Marshaller;
+import org.springframework.validation.BindException;
 import org.springframework.web.servlet.View;
 
 import com.gmail.at.zhuikov.aleksandr.root.domain.Order;
@@ -48,6 +49,29 @@ public class OrderXmlViewTest {
 		
 		view.render(model, request, response);
 
+		verify(marshaller).marshal(Mockito.eq(order), Mockito.isA(Result.class));
+	}
+	
+	@Test
+	public void renderModelWithBindingError() throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Order order = new Order("x");
+		BindException bindingResult = new BindException(order, "order");
+		bindingResult.rejectValue("email", "empty");
+		model.put("org.springframework.validation.BindingResult.order",
+				bindingResult);
+		
+		view.render(model, request, response);
+	}
+	
+	@Test
+	public void renderModelWithOrderAndBindingResultWithoutErrors() throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Order order = new Order("x");
+		model.put("order", order);
+		model.put("org.springframework.validation.BindingResult.order",
+				new BindException(order, "order"));
+		view.render(model, request, response);
 		verify(marshaller).marshal(Mockito.eq(order), Mockito.isA(Result.class));
 	}
 

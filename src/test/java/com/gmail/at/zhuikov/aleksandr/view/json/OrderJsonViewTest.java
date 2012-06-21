@@ -69,4 +69,15 @@ public class OrderJsonViewTest {
 		
 		view.render(model, request, response);
 	}
+	
+	@Test
+	public void renderModelWithOrderAndBindingResultWithoutErrors() throws Exception {
+		Map<String, Object> model = new HashMap<String, Object>();
+		Order order = new Order("x");
+		model.put("order", order);
+		model.put("org.springframework.validation.BindingResult.order",
+				new BindException(order, "order"));
+		view.render(model, request, response);
+		verify(objectMapper).writeValue((JsonGenerator) null, order);
+	}
 }
