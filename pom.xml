@@ -460,7 +460,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:ignite/spring-reference.git</connection>
 		<url>scm:git:git@github.com:ignite/spring-reference.git</url>
-		<developerConnection>scm:git:ssh://github.com/ignite/spring-reference.git</developerConnection>
+		<developerConnection>scm:git:ssh://git@github.com/ignite/spring-reference.git</developerConnection>
 	</scm>
 	<profiles>
 		<profile>
