@@ -18,12 +18,12 @@ import javax.persistence.Table;
 import javax.validation.GroupSequence;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
 import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -58,7 +58,7 @@ public class Order {
 	}
 	
 	@NotBlank
-	@Length(min = 5, max = 30)
+	@Size(min = 5, max = 30)
 	@Pattern(regexp = "[a-zA-Z\\s]*", message = "{onlyCharsAllowed}")
 	public String getCustomer() {
 		return customer;
